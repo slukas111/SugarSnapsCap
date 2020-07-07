@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from users.urls import urlpatterns as userurls
+from sugar_app.urls import urlpatterns as sugarappurls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+urlpatterns += userurls + sugarappurls
+
