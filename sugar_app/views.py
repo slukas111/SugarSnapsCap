@@ -13,11 +13,9 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     model = BoxItem
     fields = ['title', 'item_category', 'description', 'expiration', 'que_assign', 'image']
 
-    def get_form(self):
-        form = super().get_form()
+    def form_valid(self, form):
         form.instance.profile = self.request.user
-        # form.fields['expiration'].widget = DateTimePickerInput()
-        return form
+        return super().form_valid(form)
 
 
 class PostDetailView(DetailView):
