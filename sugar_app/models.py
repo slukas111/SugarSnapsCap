@@ -19,7 +19,7 @@ class Categories(models.Model):
     #     (Test, 'Test'),
     # ]
 
-    category = models.CharField(max_length=100)
+    category = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.category
