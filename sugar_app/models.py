@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.shortcuts import reverse
 
 # Create your models here.
 
@@ -43,3 +44,6 @@ class BoxItem(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('postdetail', kwargs={'pk': self.pk})

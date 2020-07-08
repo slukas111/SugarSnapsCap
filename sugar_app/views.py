@@ -16,3 +16,9 @@ class PostCreateView(CreateView):
         form.instance.profile = self.request.user
         # form.fields['expiration'].widget = DateTimePickerInput()
         return form
+
+
+class PostDetailView(DetailView):
+    model = BoxItem
+
+
