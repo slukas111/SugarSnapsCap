@@ -17,10 +17,10 @@ from django.contrib import admin
 from django.urls import path
 from users.urls import urlpatterns as userurls
 from sugar_app.urls import urlpatterns as sugarappurls
+from authentication.urls import urlpatterns as authenticationurls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
-urlpatterns += userurls + sugarappurls
-
+urlpatterns += userurls + sugarappurls + authenticationurls
