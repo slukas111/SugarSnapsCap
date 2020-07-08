@@ -6,14 +6,19 @@ from django.contrib.auth.models import User
 
 
 class Categories(models.Model):
+    # Vegan = 'Vegan'
+    # Vegetarian = 'Vegetarian'
+    # Mixed = 'Mixed'
+    # Test = 'Test'
+    #
+    # CATEGORY_CHOICES = [
+    #     (Vegan, 'vegan'),
+    #     (Vegetarian, 'vegetarian'),
+    #     (Mixed, 'mixed'),
+    #     (Test, 'Test'),
+    # ]
 
-    CATEGORY_CHOICES = [
-        ('V', 'vegan'),
-        ('G', 'vegetarian'),
-        ('M', 'mixed'),
-    ]
-
-    category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
+    category = models.CharField(max_length=100)
 
     def __str__(self):
         return self.category
@@ -34,6 +39,7 @@ class BoxItem(models.Model):
     que_assign = models.CharField(default='available', choices=Que_Choices, max_length=1)
     image = models.ImageField(default="default.jpg", upload_to="boxitem")
     profile = models.ForeignKey(User, on_delete=models.CASCADE)
+    item_category = models.ForeignKey(Categories, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
