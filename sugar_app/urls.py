@@ -6,7 +6,7 @@ from .views import PostCreateView, PostDetailView
 
 urlpatterns = [
     path('postcreate/', PostCreateView.as_view(template_name='boxform.html'), name='postcreate'),
-    path('post/<int:pk>/', PostDetailView.as_view(template_name='boxitemdetail.html'), name="postdetail"),
+    path('post/<str:slug>/', PostDetailView.as_view(template_name='boxitemdetail.html'), name="postdetail"),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
