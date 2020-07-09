@@ -21,7 +21,7 @@ def index(request):
 def user_profile_view(request, user_id):
     html = 'user_profile.html'
     profile = Profile.objects.get(id=user_id)
-    donations = BoxItem.objects.filter(profile=user_id)
+    donations = BoxItem.objects.filter(profile=user_id).order_by('-id')
     context = {
         'user': profile.user,
         'donations': donations
