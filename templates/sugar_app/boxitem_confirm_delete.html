@@ -1,0 +1,14 @@
+  <form action="" method="post">
+        {% csrf_token %}
+        <fieldset >
+            <legend >
+                Delete Post
+            </legend>
+        </fieldset>
+        <div >
+            <p>Are you sure you want to delete <strong><em>{{object.title}}</em></strong>?</p>
+            <a class="btn btn-outline-secondary" href="{% url 'postdetail' object.id %}">Cancel</a>
+
+            <button class="btn btn-outline-danger" type="submit">Delete</button>
+        </div>
+    </form>
