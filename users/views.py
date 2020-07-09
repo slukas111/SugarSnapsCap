@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 from users.models import Profile
 from sugar_app.models import BoxItem
+from users.forms import EditProfileForm
 
 # Create your views here.
 
@@ -26,9 +27,29 @@ def user_profile_view(request, user_id):
     donations = BoxItem.objects.filter(profile=user_id).order_by('-id')
     context = {
         'user': profile.user,
-        'donations': donations
+        'donations': donations,
+        'id': profile.id,
+        'bio': profile.bio    
         }
     return render(request, html, context)
+
+def EditUser(request, id):
+    user = Profile.objects.get(id=id)
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            user.bio = data['bio']
+            user.profile_image = data['profile_image']
+            user.save()
+            return HttpResponseRedirect(reverse('user_profile', args=(id, )))
+    form = EditProfileForm(initial={
+    'bio': user.bio,
+    'profile_image': user.profile_image
+    })
+    return render(request, 'editUser.html', {'form': form})
+
+
 
 
 class UserPostListView(ListView):

@@ -2,8 +2,10 @@
 
 <h3>{{ user.first_name }} {{ user.last_name }}</h3>
 <h4>Joined: {{ user.date_joined }}</h4>
+<p>{{bio}}</p>
 <h3>Donations</h3>
 {% for post in donations %}
     <h3><a href="{% url 'postdetail' post.slug %}">{{ post.title }}</a></h3>
 {% endfor %}
 <h4><a href="{% url 'homepage' %}">Home</a></h4>
+<a href='/edit/{{id}}'>Settings</a>
