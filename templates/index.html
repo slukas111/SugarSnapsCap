@@ -1,1 +1,9 @@
 <h2>Homepage</h2>
+{{ user.username }} <br>
+{{ user.id }} <br>
+
+<h4><a href="postcreate/">Create Donation</a></h4>
+
+<h4><a href="{% url 'user_profile' user.id %}">My Profile</a></h4>
+
+<h4><a href="{% url 'logout' %}">Logout</a></h4>

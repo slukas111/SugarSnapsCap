@@ -1,0 +1,9 @@
+<h2>Profile</h2>
+
+<h3>{{ user.first_name }} {{ user.last_name }}</h3>
+<h4>Joined: {{ user.date_joined }}</h4>
+<h3>Donations</h3>
+{% for post in donations %}
+    <h3><a href="{% url 'postdetail' post.pk %}">{{ post.title }}</a></h3>
+{% endfor %}
+<h4><a href="{% url 'homepage' %}">Home</a></h3>
