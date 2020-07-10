@@ -2,17 +2,18 @@
 {% load ratings %}
 
 {% block content %}
-<h2>Profile</h2>
-{% ratings user %}
+<div>
+    <h2>Profile</h2>
+    {% ratings user %}
 
-<h3>{{ user.first_name }} {{ user.last_name }}</h3>
-<h4>Joined: {{ user.date_joined }}</h4>
-<p>{{bio}}</p>
-<h3>Donations</h3>
-{% for post in donations %}
+    <h3>Name: {{ user.first_name }} {{ user.last_name }}{{user}}</h3>
+    <h4>Joined: {{ user.date_joined }}</h4>
+    <p>{{bio}}</p>
+    <h3>Donations</h3>
+    {% for post in donations %}
     <h3><a href="{% url 'postdetail' post.slug %}">{{ post.title }}</a></h3>
-{% endfor %}
-<h4><a href="{% url 'homepage' %}">Home</a></h4>
-<a href='/edit/{{id}}'>Settings</a>
-
+    {% endfor %}
+    <h4><a href="{% url 'homepage' %}">Home</a></h4>
+    <a href='/edit/{{id}}'>Settings</a>
+</div>
 {% endblock content %}
