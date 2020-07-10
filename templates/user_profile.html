@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+
 <h2>Profile</h2>
 
 <h3>{{ user.first_name }} {{ user.last_name }}</h3>
@@ -7,5 +10,28 @@
 {% for post in donations %}
     <h3><a href="{% url 'postdetail' post.slug %}">{{ post.title }}</a></h3>
 {% endfor %}
-<h4><a href="{% url 'homepage' %}">Home</a></h4>
+
+<div class="counter">
+<h3><p>Followers: {{following_count}}</p> 
+
+<div class = 'follow-unfollow'>
+
+{% if user.is_authenticated %}
+
+{% comment %} {{is_following}} {% endcomment %}
+{% if profile in all_followers %}
+{%endif%} 
+{%endif%} 
+{% comment %} {{ is_following }} {% endcomment %}
+{% if is_following %}
+
+<a href = "/unfollow/{{id}}/"><button>Following</button></a>
+{%else%}
+<a href = "/follow/{{id}}/"><button>Follow</button></a>
+
+{%endif%}
+</div>
+{% comment %} <h4><a href="{% url 'homepage' %}">Home</a></h4> {% endcomment %}
 <a href='/edit/{{id}}'>Settings</a>
+
+{% endblock content %}
