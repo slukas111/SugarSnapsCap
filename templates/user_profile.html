@@ -14,6 +14,6 @@
     <h3><a href="{% url 'postdetail' post.slug %}">{{ post.title }}</a></h3>
     {% endfor %}
     <h4><a href="{% url 'homepage' %}">Home</a></h4>
-    <a href='/edit/{{id}}'>Settings</a>
+    <a href='/edit/{{user.id}}'>Settings</a>
 </div>
 {% endblock content %}
