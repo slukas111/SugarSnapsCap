@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'sugar_app',
     'users.apps.UsersConfig',
-
+    'star_ratings'
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

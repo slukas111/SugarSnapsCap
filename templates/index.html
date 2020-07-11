@@ -2,16 +2,23 @@
 {% block content %}
 
 <h2>Homepage</h2>
-{{ user.username }} <br>
-{{ user.id }} <br>
-{% comment %} 
+<!--{{ user.username }} <br>-->
+{% comment %}
 <h4><a href="{% url 'postcreate' %}">Create Donation</a></h4>
 
-<!--<h4><a href="{% url 'user_profile' user.id %}">My Profile</a></h4>-->
-<h4><a href="{% url 'userposts' user.username %}">My Profile</a></h4>
+<h4><a href="{% url 'user_profile' user.id %}">My Profile</a></h4>
+<!--<h4><a href="{% url 'userposts' user.username %}">My Profile</a></h4>-->
 
-<h4><a href="{% url 'logout' %}">Logout</a></h4> {% endcomment %}
-
+<h4><a href="{% url 'logout' %}">Logout</a></h4>
+{% endcomment %}
+{% for post in posts %}
+<hr>
+Title:{{post.title}}
+<p>description: {{post.description}}</p>
+<p>Posted by: {{post.profile}}</p>
+<img src="{{post.image.url}}" alt="{{post.title}}" style="height: 80px">
+<hr>
+{% endfor %}
 
 
 {% endblock content %}

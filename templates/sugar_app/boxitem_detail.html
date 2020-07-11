@@ -1,4 +1,5 @@
-
+{% extends 'base.html' %}
+{% block content %}
 <h1>Boxitem details</h1>
 
 <h3> Title: {{ object.title }}</h3>
@@ -13,5 +14,6 @@
 <a  class="btn btn-outline-secondary" href="{%url 'postupdate' object.id%}">Update</a>
         <a  class="btn btn-outline-danger" href="{%url 'postdelete' object.id %}">Delete</a>
 
+{% endblock content %}
 
 

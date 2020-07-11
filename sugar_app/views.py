@@ -8,6 +8,12 @@ from .models import BoxItem
 
 
 # Create your views here.
+class PostListView(ListView):
+    model = BoxItem
+    template_name = 'index.html'
+    context_object_name = 'posts'
+    ordering = ['-date_posted']
+
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = BoxItem
