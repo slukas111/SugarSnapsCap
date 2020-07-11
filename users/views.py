@@ -24,13 +24,21 @@ def index(request):
 
 def user_profile_view(request, user_id):
     html = 'user_profile.html'
-    profile = Profile.objects.get(id=user_id)
+    profile = User.objects.get(id=user_id).profile
+    user = User.objects.get(id=user_id)
     donations = BoxItem.objects.filter(profile=user_id).order_by('-id')
+    all_followers = request.user.profile.following.all()
+    following_count = all_followers.count()
+
     context = {
-        'user': profile.user,
         'donations': donations,
         'id': profile.id,
-        'bio': profile.bio
+        'bio': Profile.objects.get(user=user).bio,
+        'all_followers': all_followers, 
+        'following_count': following_count,
+        'profile': profile,
+        'is_following': profile in all_followers,
+        'user':user,
     }
     return render(request, html, context)
 
@@ -60,3 +68,24 @@ class UserPostListView(ListView):
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return BoxItem.objects.filter(profile=user).order_by('-date_posted')
+
+@login_required
+def Follow(request, id):
+    html= "user_profile.html"
+    own_profile = request.user.profile # or your queryset to get
+    following_profile = Profile.objects.get(id=id)
+    own_profile.following.add(following_profile)  # and .remove() for unfollow
+    own_profile.save()
+
+    return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))
+
+@login_required
+def Unfollow(request, id):
+    html = "user_profile.html"
+    own_profile = request.user.profile  # or your queryset to get
+    following_profile = Profile.objects.get(id=id)
+
+    own_profile.following.remove(following_profile)  # and .remove() for unfollow
+    own_profile.save()
+
+    return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))
