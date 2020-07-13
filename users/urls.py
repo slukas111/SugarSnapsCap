@@ -8,7 +8,7 @@ urlpatterns = [
     path('user/<str:username>/', UserPostListView.as_view(), name="userposts"),
     path('edit/<int:id>', EditUser),
     path('follow/<int:id>/', Follow, name="follow"),
-    path('unfollow/<int:id>/', Unfollow, name="unfollow")
+    path('unfollow/<int:id>/', Unfollow, name="unfollow"),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
 
 ]

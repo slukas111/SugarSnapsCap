@@ -13,7 +13,7 @@
 {% endcomment %}
 {% for post in posts %}
 <hr>
-Title:{{post.title}}
+Title: <a href="{% url 'postdetail' post.slug  %}">{{post.title}}</a>
 <p>description: {{post.description}}</p>
 <p>Posted by: {{post.profile}}</p>
 <img src="{{post.image.url}}" alt="{{post.title}}" style="height: 80px">
