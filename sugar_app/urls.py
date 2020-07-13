@@ -2,7 +2,7 @@ from django.urls import path
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from SugarProject import settings
-from .views import PostCreateView, PostDetailView, PostUpdateView, PostDeleteView, PostListView
+from .views import PostCreateView, PostDetailView, PostUpdateView, PostDeleteView, PostListView, reserve
 
 urlpatterns = [
     path('', PostListView.as_view(), name="homepage"),
@@ -10,6 +10,7 @@ urlpatterns = [
     path('post/<str:slug>/', PostDetailView.as_view(), name="postdetail"),
     path('post/<int:pk>/update/', PostUpdateView.as_view(), name="postupdate"),
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name="postdelete"),
+    path('reserve/<str:slug>/', reserve, name='reserve'),
 
 ]
 

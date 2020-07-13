@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import reverse
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
+from users.models import  Profile
 
 
 # Create your models here.
@@ -44,6 +45,7 @@ class BoxItem(models.Model):
     profile = models.ForeignKey(User, on_delete=models.CASCADE)
     item_category = models.ForeignKey(Categories, on_delete=models.CASCADE)
     slug = models.SlugField(unique=True)
+    reserve = models.ManyToManyField(Profile, symmetrical=False, blank=True, related_name='reserving')
 
     def __str__(self):
         return self.title

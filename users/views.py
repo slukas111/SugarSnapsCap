@@ -34,11 +34,11 @@ def user_profile_view(request, user_id):
         'donations': donations,
         'id': profile.id,
         'bio': Profile.objects.get(user=user).bio,
-        'all_followers': all_followers, 
+        'all_followers': all_followers,
         'following_count': following_count,
         'profile': profile,
         'is_following': profile in all_followers,
-        'user':user,
+        'user': user,
     }
     return render(request, html, context)
 
@@ -69,15 +69,17 @@ class UserPostListView(ListView):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return BoxItem.objects.filter(profile=user).order_by('-date_posted')
 
+
 @login_required
 def Follow(request, id):
-    html= "user_profile.html"
-    own_profile = request.user.profile # or your queryset to get
+    html = "user_profile.html"
+    own_profile = request.user.profile  # or your queryset to get
     following_profile = Profile.objects.get(id=id)
     own_profile.following.add(following_profile)  # and .remove() for unfollow
     own_profile.save()
 
     return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))
+
 
 @login_required
 def Unfollow(request, id):
