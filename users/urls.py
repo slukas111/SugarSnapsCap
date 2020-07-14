@@ -1,6 +1,5 @@
 from django.urls import path, include
-from users.views import index, user_profile_view, UserPostListView, EditUser, Follow, Unfollow
-
+from users.views import user_profile_view, UserPostListView, EditUser, Follow, Unfollow
 
 urlpatterns = [
     # path('', index, name='homepage'),
