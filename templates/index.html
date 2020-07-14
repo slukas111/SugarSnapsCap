@@ -2,7 +2,7 @@
 {% block content %}
 <div>
     <h2>Homepage</h2>
-    <h4><a href="{% url 'userposts' user.username %}">My Profile</a></h4>
+    <h4><a href="{% url 'userposts' user.username %}">View Profile</a></h4>
     {% for post in posts %}
     Title: <a href="{% url 'postdetail' post.slug  %}">{{post.title}}</a>
     <p>description: {{post.description}}</p>

@@ -2,7 +2,7 @@ from django.urls import path
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from SugarProject import settings
-from .views import PostCreateView, PostDetailView, PostUpdateView, PostDeleteView, PostListView, reserve
+from .views import  PostCreateView, PostDetailView, PostUpdateView, PostDeleteView, PostListView, reserve
 
 urlpatterns = [
     path('', PostListView.as_view(), name="homepage"),
