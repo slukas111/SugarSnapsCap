@@ -79,6 +79,7 @@ def Follow(request, id):
 
     return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))
 
+
 @login_required
 def Unfollow(request, id):
     html = "user_profile.html"

@@ -3,6 +3,9 @@ from django.db import models
 # Create your models here.
 from django.db import models
 from django.contrib.auth.models import User
+import sys
+sys.path.append('..')
+from locations.models import Area
 
 
 class Profile(models.Model):
@@ -11,6 +14,7 @@ class Profile(models.Model):
     one_click_reserve = models.BooleanField(default=False)
     followers = models.ManyToManyField('self', symmetrical=False, blank=True, related_name='following')
     bio = models.CharField(max_length=500, null=True)
+    location = models.ForeignKey(Area, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return f'{self.user.username} Profile'
