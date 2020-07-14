@@ -1,24 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
+<div>
+    <h2>Homepage</h2>
 
-<h2>Homepage</h2>
-<!--{{ user.username }} <br>-->
-{% comment %}
-<h4><a href="{% url 'postcreate' %}">Create Donation</a></h4>
+    <h4><a href="{% url 'userposts' user.username %}">My Profile</a></h4>
+    <hr>
+    {% for post in posts %}
 
-<h4><a href="{% url 'user_profile' user.id %}">My Profile</a></h4>
-<!--<h4><a href="{% url 'userposts' user.username %}">My Profile</a></h4>-->
+    Title: <a href="{% url 'postdetail' post.slug  %}">{{post.title}}</a>
+    <p>description: {{post.description}}</p>
+    <p>Posted by: {{post.profile}}</p>
 
-<h4><a href="{% url 'logout' %}">Logout</a></h4>
-{% endcomment %}
-{% for post in posts %}
-<hr>
-Title:{{post.title}}
-<p>description: {{post.description}}</p>
-<p>Posted by: {{post.profile}}</p>
-<img src="{{post.image.url}}" alt="{{post.title}}" style="height: 80px">
-<hr>
-{% endfor %}
+    <img alt="{{post.title}}" src="{{post.image.url}}" style="height: 80px">
+    <br>
+    profile = {{post.profile}} <br>
+
+    user = {{user}}
+    <br>
+    {% if user.profile in post.reserve.all %}
+    <button disabled>Reserved</button>
+    {% else %}
+    <a aria-pressed="true" class="btn btn-primary btn-lg active btn-block" href="{% url 'reserve' post.slug %}"
+                   role="button">
+                    Reserve
+                </a>
+    {% endif %}
 
 
+    <hr>
+    {% endfor %}
+
+
+</div>
 {% endblock content %}

@@ -12,6 +12,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('users', '0001_initial'),
     ]
 
     operations = [
@@ -35,6 +36,7 @@ class Migration(migrations.Migration):
                 ('slug', models.SlugField(unique=True)),
                 ('item_category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sugar_app.Categories')),
                 ('profile', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('reserve', models.ManyToManyField(blank=True, related_name='reserving', to='users.Profile')),
             ],
         ),
     ]
