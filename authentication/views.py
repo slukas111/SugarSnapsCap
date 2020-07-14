@@ -43,6 +43,7 @@ def signup_view(request):
             user.profile.first_name = form.cleaned_data.get('first_name')
             user.profile.last_name = form.cleaned_data.get('last_name')
             user.profile.email = form.cleaned_data.get('email')
+            user.profile.location = form.cleaned_data.get('location')
             user.save()
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
@@ -50,6 +51,7 @@ def signup_view(request):
             if user:
                 login(request, user)
                 return HttpResponseRedirect(reverse('homepage'))
+    
     form = SignUpForm()
     context = {'form': form}
     return render(request, html, context)
