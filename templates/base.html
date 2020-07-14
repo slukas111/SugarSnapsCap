@@ -15,9 +15,10 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         {% comment %} <a class="navbar-brand" href="#">Sugar Snaps</a> {% endcomment %}
-              <p style = "font-family: 'Lobster', cursive;font-size:32 px;font-style:italic;color:white;">
+              <p style = "font-family: 'Lobster', cursive;font-size:32px;font-style:italic;color:white;">
          Sugar Snaps
       </p>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
@@ -33,29 +34,28 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'postcreate' %}">Donate 📦</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Trending 🆕</a>
-                </li>
+                {% if request.user.is_authenticated %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown">
                         Your Profile 👤
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'user_profile' user.id %}">View Profile</a>
+                        <a class="dropdown-item" href="{% url 'user_profile' request.user.id %}">View Profile</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Share Snaps</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{% url 'logout' %}">Login/Logout</a>
                     </div>
                 </li>
+                {% endif %}
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact Us</a>
+                </li>
+                                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Login/Logout</a>
                 </li>
             </ul>
         </div>
     </nav>
-
     </header>
 
     <main role="main" class="container">
@@ -66,6 +66,7 @@
         </div>
     </div>
 </main>
+
 
 
 </body>

@@ -5,40 +5,71 @@
 
 
 {% block content %}
-<div>
-    <h2>Profile</h2>
+
+<h2>Welcome to your profile,</h2>
+
+<div class="card bg-light">
+  <div class="card-body">
+  <h4 class="card-title">{{ user.first_name }} {{ user.last_name }}</h4>
+
     {% ratings user %}
+</div>
+</div>
+<br></br>
 
-    <h3>Name: {{ user.first_name }} {{ user.last_name }}{{user}}</h3>
-    <h4>Joined: {{ user.date_joined }}</h4>
-    <p>{{bio}}</p>
-    <h3>Donations</h3>
-    {% for post in donations %}
-    <h3><a href="{% url 'postdetail' post.slug %}">{{ post.title }}</a></h3>
-{% endfor %}
+<div class="card bg-light">
+  <div class="card-body">
+    <h4><p>Support: {{following_count}}</p> 
 
-<div class="counter">
-<h3><p>Followers: {{following_count}}</p> 
+
+<div class="following-users">
+    {% for followers in all_followers %}
+
+        <img
+            alt="{{followers.title}}"
+            class="rounded-circle mr-2"
+            style="width: 80px; height: 80px;"
+            src="{{ followers.profile_image.url }}">
+            {% comment %} <img alt="{{post.title}}" src="{{post.image.url}}" style="height: 80px"> {% endcomment %}
+        <ul><a href="/profile/{{followers.id}}">{{followers.user}}</a><ul>
+    {% endfor %}
+</div>
 
 <div class = 'follow-unfollow'>
-
-{% if user.is_authenticated %}
-
-{% comment %} {{is_following}} {% endcomment %}
-{% if profile in all_followers %}
-{%endif%} 
-{%endif%} 
-{% comment %} {{ is_following }} {% endcomment %}
-{% if is_following %}
-
-<a href = "/unfollow/{{id}}/"><button>Following</button></a>
-{%else%}
-<a href = "/follow/{{id}}/"><button>Follow</button></a>
-
-{%endif%}
+ {% if user.is_authenticated %}
+    {% if profile in all_followers %}
+    {%endif%} 
+    {%endif%} 
 </div>
-{% comment %} <h4><a href="{% url 'homepage' %}">Home</a></h4> {% endcomment %}
-<a href='/edit/{{id}}'>Settings</a>
+{% if is_following %}
+    {% comment %} <a href = "/unfollow/{{id}}/"><button>Following</button></a> {% endcomment %}
+    {% comment %} <button type="button" class="btn btn-info" a href = "/unfollow/{{id}}/">Following</button> {% endcomment %}
+<button type="button" class="btn btn-outline-success and-all-other-classes"> 
+  <a href="/unfollow/{{id}}/" style="color:inherit"> Following </a>
+</button>
+    {%else%}
+<button type="button" class="btn btn-outline-success and-all-other-classes"> 
+  <a href="/follow/{{id}}/" style="color:inherit"> Follow </a>
+    {% comment %} <a href = "/follow/{{id}}/"><button>Follow</button></a> {% endcomment %}
+    {%endif%}
+</div>
+</div>
 
+<br></br>
+
+
+<div class="card bg-light">
+  <div class="card-body">
+    <h3>Donations</h3>
+    {% for post in donations %}
+    <h4><a href="{% url 'postdetail' post.slug %}">{{ post.title }}</a></h4>
+    <img alt="{{post.title}}" src="{{post.image.url}}" style="height: 80px">
+
+    {% endfor %}
+</div>
+</div>
+
+
+    <a href='/edit/{{user.id}}'>Settings</a>
 
 {% endblock content %}
