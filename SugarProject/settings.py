@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'sugar_app',
     'users.apps.UsersConfig',
     'star_ratings',
-    'locations'
+    'locations',
     'forumapp'
 
 ]
