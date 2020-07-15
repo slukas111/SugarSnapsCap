@@ -2,8 +2,24 @@
 {% block content %}
 <div>
     <h2>Homepage</h2>
-
-     {% if user.is_authenticated %}
+    <form action='.' method='GET'>
+        <h5>Filter by:</h5>
+        <select name='filter'>
+            <option>--Choose a filter--</option>
+            {% for category in categories %}
+                <option value="{{category}}">{{ category }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <br>
+        <label>Votes</label>
+        <input type="checkbox" name='votes'>
+        <br>
+        <br>
+        <button type='submit'>Apply Filter</button> <br />
+        <a href="{% url 'homepage' %}">Reset Filter</a>
+    </form>
+    {% if user.is_authenticated %}
         <h4><a href="{% url 'userposts' user.username %}">View Profile</a></h4>
     {% else %}
         You are not logged in
