@@ -51,6 +51,8 @@ def signup_view(request):
             if user:
                 login(request, user)
                 return HttpResponseRedirect(reverse('homepage'))
+    else:
+        form = SignUpForm(instance)
     
     form = SignUpForm()
     context = {'form': form}
