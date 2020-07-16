@@ -3,11 +3,12 @@ from .forms import ForumPostForm, CommentForm
 from .models import ForumPost, Comment
 from django.views import View
 from django.http import HttpResponseRedirect
-
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class ForumView(CreateView):
+class ForumView(LoginRequiredMixin, CreateView):
     model = ForumPost
     fields = ['title', 'text']
 
@@ -42,6 +43,7 @@ class ForumView(CreateView):
 #         return super().form_valid(form)
 
 #
+@login_required()
 def postdetails(request, slug):
     html = 'forumapp/post.html'
     post = get_object_or_404(ForumPost, slug=slug)
