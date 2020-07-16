@@ -9,69 +9,73 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
-    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+    <link href="{% static 'star-ratings/css/star-ratings.css' %}" rel="stylesheet">
+    <script src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}" type="text/javascript"></script>
 </head>
 
 <body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    {% comment %} <a class="navbar-brand" href="#">Sugar Snaps</a> {% endcomment %}
+    <p style="font-family: 'Lobster', cursive;font-size:32px;font-style:italic;color:white;">
+        Sugar Snaps
+    </p>
+    <button class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
 
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        {% comment %} <a class="navbar-brand" href="#">Sugar Snaps</a> {% endcomment %}
-              <p style = "font-family: 'Lobster', cursive;font-size:32px;font-style:italic;color:white;">
-         Sugar Snaps
-      </p>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'homepage' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'postcreate' %}">Donate 📦</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">Trending 🆕</a>
+            </li>
+
+            {% if request.user.is_authenticated %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdown"
+                   role="button">
+                    Your Profile 👤
+                </a>
+                <div aria-labelledby="navbarDropdown" class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'user_profile' request.user.id %}">View Profile</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Share Snaps</a>
+                </div>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact Us</a>
+            </li>
+                        {% if request.user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Login</a>
+            </li>
+            {% endif %}
 
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'homepage' %}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'postcreate' %}">Donate 📦</a>
-                </li>
+        </ul>
+    </div>
+</nav>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Trending 🆕</a>
-                </li>
-
-                {% if request.user.is_authenticated %}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown">
-                        Your Profile 👤
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'user_profile' request.user.id %}">View Profile</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Share Snaps</a>
-                    </div>
-                </li>
-                {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact Us</a>
-                </li>
-                                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Login/Logout</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    </header>
-
-    <main role="main" class="container">
-      <div class="row">
+<main class="container" role="main">
+    <div class="row">
 
         <div class="col-md-12">
             {% block content %}{% endblock %}
         </div>
     </div>
 </main>
-
 
 
 </body>
