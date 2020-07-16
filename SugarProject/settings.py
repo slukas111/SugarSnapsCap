@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'forumapp',
     'bootstrap4',
     'bootstrap_datepicker_plus',
+    'sendemail'
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -138,3 +139,12 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
+
+#Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_HOST ='smtp.gmail.com'
+# EMAIL_PORT = '587'
+# EMAIL_HOST_USER = 'sashamati@gmail.com'
+# EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_SSL = False
+EMAIL_USE_TLS = False
