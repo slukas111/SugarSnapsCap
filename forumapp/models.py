@@ -18,7 +18,7 @@ class ForumPost(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('forumdetail', kwargs={'slug': self.slug})
+        return reverse('forum')
 
 
 class Comment(models.Model):
