@@ -12,7 +12,6 @@ from users.forms import EditProfileForm
 # Create your views here.
 
 
-
 def user_profile_view(request, user_id):
     html = 'user_profile.html'
     profile = User.objects.get(id=user_id).profile
@@ -30,6 +29,7 @@ def user_profile_view(request, user_id):
         'profile': profile,
         'is_following': profile in all_followers,
         'user': user,
+        'image': profile.profile_image
     }
     return render(request, html, context)
 
