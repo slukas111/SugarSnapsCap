@@ -4,8 +4,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import BoxItem
+
 from bootstrap_datepicker_plus import DatePickerInput
+
+from .models import BoxItem, Categories
 
 
 # Create your views here.
@@ -14,6 +16,20 @@ class PostListView(ListView):
     template_name = 'index.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Categories.objects.all()
+        return context
+
+    def get_queryset(self):
+        category = self.request.GET.get('filter')
+        category_dict = Categories.objects.all().values()
+        category_list = [category['category'] for category in category_dict]
+        if category in category_list:
+            category_item = category_list.index(category) + 1
+            return BoxItem.objects.filter(item_category=category_item)
+        return BoxItem.objects.all()
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
@@ -68,4 +84,4 @@ def reserve(request, slug):
     own_profile = request.user.profile  # or your queryset to get
     box_item.reserve.add(own_profile)
 
-    return HttpResponseRedirect("/")
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

@@ -9,3 +9,5 @@ class EditProfileForm(forms.ModelForm):
             'profile_image',
             'bio'
             ]
+
+
