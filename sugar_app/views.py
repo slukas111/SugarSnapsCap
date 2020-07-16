@@ -8,6 +8,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from bootstrap_datepicker_plus import DatePickerInput
 
 from .models import BoxItem, Categories
+from django.views.defaults import page_not_found
 
 
 # Create your views here.
@@ -85,3 +86,8 @@ def reserve(request, slug):
     box_item.reserve.add(own_profile)
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def bad_request(request, exception):
+    return page_not_found(request, exception, template_name="error_404.html")
+
