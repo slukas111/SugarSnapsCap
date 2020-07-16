@@ -35,6 +35,10 @@
 
     user = {{user}}
     <br>
+    {% for r in post.reserve.all%}
+    {{r}}
+    <hr>
+    {%endfor%}
     {% if user.profile in post.reserve.all %}
     <button disabled>Reserved</button>
     {% else %}

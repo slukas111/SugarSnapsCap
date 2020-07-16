@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from users.models import Profile
 from sugar_app.models import BoxItem
 from users.forms import EditProfileForm
+from notifications.signals import notify
 
 
 # Create your views here.
@@ -19,7 +20,9 @@ def user_profile_view(request, user_id):
     donations = BoxItem.objects.filter(profile=user_id).order_by('-id')
     all_followers = request.user.profile.following.all()
     following_count = all_followers.count()
-
+    # notification = notify.send(user, recipient=user, verb='you reached level 10')
+    noti = user.notifications.unread()
+    # print(notifi/cation)
     context = {
         'donations': donations,
         'id': profile.id,
@@ -29,7 +32,9 @@ def user_profile_view(request, user_id):
         'profile': profile,
         'is_following': profile in all_followers,
         'user': user,
-        'image': profile.profile_image
+        'image': profile.profile_image,
+        # 'notification': notification,
+        'noti': noti
     }
     return render(request, html, context)
 
@@ -44,6 +49,7 @@ def editUser(request, id):
             user.profile_image = data['profile_image']
             user.save()
             return HttpResponseRedirect(reverse('user_profile', args=(id,)))
+
     form = EditProfileForm(initial={
         'bio': user.bio,
         'profile_image': user.profile_image
