@@ -37,7 +37,7 @@ def user_profile_view(request, user_id):
 def editUser(request, id):
     user = Profile.objects.get(id=id)
     if request.method == 'POST':
-        form = EditProfileForm(request.POST)
+        form = EditProfileForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             data = form.cleaned_data
             user.bio = data['bio']
@@ -46,7 +46,6 @@ def editUser(request, id):
             return HttpResponseRedirect(reverse('user_profile', args=(id,)))
     form = EditProfileForm(initial={
         'bio': user.bio,
-        'profile_image': user.profile_image
     })
     return render(request, 'editUser.html', {'form': form})
 
