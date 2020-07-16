@@ -46,6 +46,7 @@ def editUser(request, id):
             return HttpResponseRedirect(reverse('user_profile', args=(id,)))
     form = EditProfileForm(initial={
         'bio': user.bio,
+        'profile_image': user.profile_image
     })
     return render(request, 'editUser.html', {'form': form})
 
