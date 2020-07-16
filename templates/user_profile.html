@@ -20,7 +20,7 @@
     <p class="lead">{{bio}}</p>
     <hr class="my-4">
     <p class="lead">
-        <a class="btn btn-warning btn-lg" href='/edit/{{user.id}}' role="button">Update</a>
+        <a class="btn btn-warning btn-lg" href='{% url "updateprofile" user.id %}' role="button">Update</a>
     </p>
 </div>
 

@@ -34,7 +34,7 @@ def user_profile_view(request, user_id):
     return render(request, html, context)
 
 
-def EditUser(request, id):
+def editUser(request, id):
     user = Profile.objects.get(id=id)
     if request.method == 'POST':
         form = EditProfileForm(request.POST)
