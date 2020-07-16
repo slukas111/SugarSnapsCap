@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import  ViewForumPostList
+from .views import ForumView, postdetails
 
 urlpatterns = [
-    path('test/', ViewForumPostList.as_view(), name='ViewForumPostList'),
+    path('forum/', ForumView.as_view(), name='forum'),
+    path('post_details/<str:slug>/', postdetails, name='forumpostdetails'),
 ]

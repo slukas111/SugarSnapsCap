@@ -6,10 +6,10 @@ from .models import ForumPost, Comment
 class ForumPostForm(forms.ModelForm):
     class Meta:
         model = ForumPost
-        exclude = ['author', 'slug']
+        exclude = ['author', 'slug', 'created_on']
 
 
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        exclude = ['post']
+        fields = ['text']

@@ -10,7 +10,9 @@ from users.forms import EditProfileForm
 
 
 # Create your views here.
-@login_required()
+
+
+
 def user_profile_view(request, user_id):
     html = 'user_profile.html'
     profile = User.objects.get(id=user_id).profile
@@ -32,7 +34,6 @@ def user_profile_view(request, user_id):
     return render(request, html, context)
 
 
-@login_required()
 def EditUser(request, id):
     user = Profile.objects.get(id=id)
     if request.method == 'POST':

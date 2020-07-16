@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import BoxItem
+from bootstrap_datepicker_plus import DatePickerInput
 
 
 # Create your views here.
@@ -17,9 +18,15 @@ class PostListView(ListView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = BoxItem
-    fields = ['title', 'item_category', 'description', 'expiration', 'que_assign', 'image']
+    fields = ['title', 'item_category', 'description', 'que_assign', 'expiration', 'image']
+
+    def get_form(self):
+        form = super().get_form()
+        form.fields['expiration'].widget = DatePickerInput()
+        return form
 
     def form_valid(self, form):
+        print('in here create')
         form.instance.profile = self.request.user
         return super().form_valid(form)
 
