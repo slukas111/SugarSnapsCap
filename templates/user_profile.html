@@ -2,10 +2,16 @@
 {% load ratings %}
  {% load notifications_tags %}
 {% block content %}
+
 {% for notification in noti %}
-<p>{{notification}}</p>
+<hr>
+<a href="{% url 'postdetail' notification.description %}">{{notification}}</a>
+<hr>
 {% endfor%}
-{% notifications_unread %}
+
+
+
+<!--{% notifications_unread %}-->
 
 <div class="jumbotron mt-4">
     <h1 class="display-4 text-center">Profile</h1>
@@ -58,7 +64,7 @@
         <button>Following</button>
     </a> {% endcomment %}
         {% comment %}
-        <button><a class="btn btn-info" href="/unfollow/{{id}}/" type="button">Following</button>
+        <button><a class="btn btn-info" href="/unfollow/{{id}}/" type="button">Following</a></button>
         {% endcomment %}
         <button class="btn btn-outline-success and-all-other-classes" type="button">
             <a href="/unfollow/{{id}}/" style="color:inherit"> Following </a>

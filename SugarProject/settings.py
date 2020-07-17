@@ -51,8 +51,6 @@ INSTALLED_APPS = [
     'notifications',
 ]
 
-DJANGO_NOTIFICATIONS_CONFIG = {'SOFT_DELETE': True}
-
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 BOOTSTRAP4 = {

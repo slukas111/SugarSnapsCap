@@ -79,10 +79,13 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 @login_required()
 def reserve(request, slug):
     box_item = BoxItem.objects.get(slug=slug)
-    print('box profile', box_item.profile)
+    action = box_item.slug
+    print('action', action)
     own_profile = request.user.profile  # or your queryset to get
     box_item.reserve.add(own_profile)
-    notify.send(sender=own_profile, recipient= box_item.profile, verb='you reserved')
+    message = ' has reserved '
+    notify.send(sender=own_profile, recipient=box_item.profile, verb=message, target=box_item, action=box_item,
+                description=action)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
