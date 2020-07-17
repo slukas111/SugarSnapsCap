@@ -87,6 +87,7 @@ def reserve(request, slug):
                 description=action)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+
 def bad_request(request, exception):
     return page_not_found(request, exception, template_name="error_404.html")
 

@@ -73,7 +73,8 @@ def Follow(request, id):
     following_profile = Profile.objects.get(id=id)
     own_profile.following.add(following_profile)  # and .remove() for unfollow
     own_profile.save()
-
+    message = 'started to following you.'
+    notify.send(sender=own_profile, recipient=following_profile.user, verb=message, description=own_profile.user.id)
     return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))
 
 
@@ -82,8 +83,9 @@ def Unfollow(request, id):
     html = "user_profile.html"
     own_profile = request.user.profile  # or your queryset to get
     following_profile = Profile.objects.get(id=id)
-
     own_profile.following.remove(following_profile)  # and .remove() for unfollow
     own_profile.save()
+    notify.send(sender=own_profile, recipient=following_profile.user, verb='unfollowed you.',
+                description=own_profile.user.id)
 
     return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))

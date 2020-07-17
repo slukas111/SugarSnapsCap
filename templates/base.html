@@ -15,12 +15,14 @@
 </head>
 <style>
     .popover{
-    max-width: 50%;
+    min-width: 10%;
+    min-heigh: 1%;
     margin-top: 1.1%;
     text-align: center;
     margin-right: 9%;
     background: #343a40!important;
 }
+
 </style>
 <body>
 
@@ -58,19 +60,29 @@
                     <a class="dropdown-item" href="#">Share Snaps</a>
                 </div>
             </li>
-              <li class="nav-item">
-                <a class="nav-link" data-container="body"  id="example-body" style="cursor: pointer;"
-                   rel="popover"
-                   data-content="<div  style='height: 60vh; overflow:scroll; width: 100%;'>
+            <li class="nav-item">
+                <a class="nav-link" data-container="body" data-content="<div   style='overflow:scroll; width: 100%;'>
                     {% for notification in request.user.notifications.all%}
-                    <a  class='text-white ' href='/post/{{notification.description}}/'>{{notification}}</a>
-                     <div class='dropdown-divider'></div>
+                   {%if notification.verb == ' has reserved '%}
+                    <a class='text-white' href='/post/{{notification.description}}/'>{{notification}}</a>
+                                         <div class='dropdown-divider'></div>
+                    {%endif%}
+                    {%if notification.verb == 'unfollowed you.'%}
+                    <a class='text-white' href='/profile/{{notification.description}}/'>{{notification}}</a>
+                                         <div class='dropdown-divider'></div>
+                    {%endif%}
+                    {%if notification.verb == 'started to following you.'%}
+                    <a class='text-white' href='/profile/{{notification.description}}/'>{{notification}}</a>
+                                         <div class='dropdown-divider'></div>
+                    {%endif%}
                     {%endfor%}
-                   </div>"
-                   data-html="true"
+                   </div>" data-html="true"
                    data-placement="bottom"
                    data-toggle="popover"
                    data-trigger="focus"
+                   id="example-body"
+                   rel="popover"
+                   style="cursor: pointer;"
                    tabindex="0">
                     Notifications
                 </a>
@@ -114,6 +126,7 @@ $(document).ready(function(){
         container: 'body' // Popover scrolls with body
     });
 });
+
 
 
 
