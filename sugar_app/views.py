@@ -80,14 +80,12 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 def reserve(request, slug):
     box_item = BoxItem.objects.get(slug=slug)
     action = box_item.slug
-    print('action', action)
     own_profile = request.user.profile  # or your queryset to get
     box_item.reserve.add(own_profile)
     message = ' has reserved '
     notify.send(sender=own_profile, recipient=box_item.profile, verb=message, target=box_item, action=box_item,
                 description=action)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
 
 def bad_request(request, exception):
     return page_not_found(request, exception, template_name="error_404.html")

@@ -20,9 +20,8 @@ def user_profile_view(request, user_id):
     donations = BoxItem.objects.filter(profile=user_id).order_by('-id')
     all_followers = request.user.profile.following.all()
     following_count = all_followers.count()
-    # notification = notify.send(user, recipient=user, verb='you reached level 10')
+    notification = user.notifications.read()
     noti = user.notifications.unread()
-    # print(notifi/cation)
     context = {
         'donations': donations,
         'id': profile.id,
@@ -33,8 +32,8 @@ def user_profile_view(request, user_id):
         'is_following': profile in all_followers,
         'user': user,
         'image': profile.profile_image,
-        # 'notification': notification,
-        'noti': noti
+        'noti': noti,
+        'notification': notification
     }
     return render(request, html, context)
 

@@ -2,16 +2,11 @@
 {% load ratings %}
  {% load notifications_tags %}
 {% block content %}
-
 {% for notification in noti %}
-<hr>
-<a href="{% url 'postdetail' notification.description %}">{{notification}}</a>
-<hr>
+<!--<a href='{% url "postdetail" notification.description %}'>{{notification}}</a>-->
+<a href='/post/{{notification.description}}/'>{{notification}}</a>
+<div class="dropdown-divider"></div>
 {% endfor%}
-
-
-
-<!--{% notifications_unread %}-->
 
 <div class="jumbotron mt-4">
     <h1 class="display-4 text-center">Profile</h1>
