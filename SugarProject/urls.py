@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import handler404, handler500
 import notifications.urls
+from django.contrib.auth import views as auth_views
 
 from users.urls import urlpatterns as userurls
 from sugar_app.urls import urlpatterns as sugarappurls
@@ -28,6 +29,9 @@ from sendemail.urls import urlpatterns as contacturls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('inbox/notifications/', include(notifications.urls, namespace='notifications')),
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name="login"),
+    path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name="logout"),
+
 ]
 
 handler404 = bad_request

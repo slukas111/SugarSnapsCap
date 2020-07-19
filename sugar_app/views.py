@@ -8,6 +8,7 @@ from bootstrap_datepicker_plus import DatePickerInput
 from .models import BoxItem, Categories
 from django.views.defaults import page_not_found
 from notifications.signals import notify
+from users.models import Profile
 
 
 # Create your views here.
@@ -37,8 +38,12 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     fields = ['title', 'item_category', 'description', 'que_assign', 'expiration', 'image']
 
     def get_form(self):
+        curr_user = self.request.user
+        print('current user', curr_user)
         form = super().get_form()
         form.fields['expiration'].widget = DatePickerInput()
+        notify.send(sender=self.request.user, recipient=self.request.user, verb='donation posted')
+
         return form
 
     def form_valid(self, form):
@@ -90,4 +95,3 @@ def reserve(request, slug):
 
 def bad_request(request, exception):
     return page_not_found(request, exception, template_name="error_404.html")
-
