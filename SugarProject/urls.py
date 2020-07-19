@@ -14,8 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf.urls import handler404, handler500
+import notifications.urls
 
 from users.urls import urlpatterns as userurls
 from sugar_app.urls import urlpatterns as sugarappurls
@@ -26,6 +27,7 @@ from sendemail.urls import urlpatterns as contacturls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('inbox/notifications/', include(notifications.urls, namespace='notifications')),
 ]
 
 handler404 = bad_request

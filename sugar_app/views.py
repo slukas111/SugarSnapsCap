@@ -4,11 +4,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-
 from bootstrap_datepicker_plus import DatePickerInput
-
 from .models import BoxItem, Categories
 from django.views.defaults import page_not_found
+from notifications.signals import notify
 
 
 # Create your views here.
@@ -43,7 +42,6 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         return form
 
     def form_valid(self, form):
-        print('in here create')
         form.instance.profile = self.request.user
         return super().form_valid(form)
 
@@ -81,10 +79,12 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 @login_required()
 def reserve(request, slug):
     box_item = BoxItem.objects.get(slug=slug)
-    print('box', box_item)
+    action = box_item.slug
     own_profile = request.user.profile  # or your queryset to get
     box_item.reserve.add(own_profile)
-
+    message = ' has reserved '
+    notify.send(sender=own_profile, recipient=box_item.profile, verb=message, target=box_item, action=box_item,
+                description=action)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
