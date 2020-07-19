@@ -1,24 +1,12 @@
 {% extends 'base.html' %}
 {% load ratings %}
 {% load notifications_tags %}
+{% load i18n %}
 {% block content %}
-{% for notification in noti %}
-<!--<a href='{% url "postdetail" notification.description %}'>{{notification}}</a>-->
-<!--<a href='/post/{{notification.description}}/'>{{notification}}</a>-->
-<!--{{notification.description}} <br>-->
-<!--{%if notification.verb == ' has reserved '%}-->
-<!--<a href='/post/{{notification.description}}/'>{{notification}}</a>-->
-<!--                     <div class='dropdown-divider'></div>-->
-<!--{%endif%}-->
-<!--{%if notification.verb == 'unfollowed you.'%}-->
-<!--<a href='/profile/{{notification.description}}/'>{{notification}}</a>-->
-<!--                     <div class='dropdown-divider'></div>-->
-<!--{%endif%}-->
-<!--{%if notification.verb == 'started to following you.'%}-->
-<!--<a href='/profile/{{notification.description}}/'>{{notification}}</a>-->
-<!--                     <div class='dropdown-divider'></div>-->
-<!--{%endif%}-->
-<!--{% endfor%}-->
+
+<br><br>
+user:{{request.user}}
+<hr>
 <div class="jumbotron mt-4">
     <h1 class="display-4 text-center">Profile</h1>
     <hr>
@@ -30,6 +18,7 @@
             Joined: {{ user.date_joined|date:"M d, Y" }}
             <br>
             {% ratings user %}
+
         </div>
     </div>
     <hr>
@@ -72,17 +61,16 @@
         {% comment %}
         <button><a class="btn btn-info" href="/unfollow/{{id}}/" type="button">Following</a></button>
         {% endcomment %}
+        {% if not user%}
         <button class="btn btn-outline-success and-all-other-classes" type="button">
-            <a href="/unfollow/{{id}}/" style="color:inherit"> Following </a>
+            <a href="/unfollow/{{id}}/" style="color:inherit"> Unfollow </a>
         </button>
         {%else%}
         <button class="btn btn-outline-success and-all-other-classes" type="button">
             <a href="/follow/{{id}}/" style="color:inherit"> Follow </a>
-            {% comment %} <a href="/follow/{{id}}/">
-            <button>Follow</button>
-        </a> {% endcomment %}
             {%endif%}
         </button>
+        {%endif%}
     </div>
 </div>
 <div class="alert alert-dark mt-4" role="alert">

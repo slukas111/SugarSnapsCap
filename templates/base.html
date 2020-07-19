@@ -65,7 +65,8 @@
                     {% for notification in request.user.notifications.all%}
                    {%if notification.verb == ' has reserved '%}
                     <a class='text-white' href='/post/{{notification.description}}/'>{{notification}}</a>
-                                         <div class='dropdown-divider'></div>
+
+                     <div class='dropdown-divider'></div>
                     {%endif%}
                     {%if notification.verb == 'unfollowed you.'%}
                     <a class='text-white' href='/profile/{{notification.description}}/'>{{notification}}</a>
