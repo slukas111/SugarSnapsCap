@@ -1,6 +1,7 @@
 from django.shortcuts import render, reverse, HttpResponseRedirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 from .forms import LoginForm, SignUpForm
 from users.models import Profile
@@ -38,22 +39,13 @@ def signup_view(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            user.refresh_from_db()
-            user.profile.first_name = form.cleaned_data.get('first_name')
-            user.profile.last_name = form.cleaned_data.get('last_name')
-            user.profile.email = form.cleaned_data.get('email')
-            user.profile.location = form.cleaned_data.get('location')
-            user.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=password)
+            data = form.cleaned_data
+            user = User.objects.create_user(
+                username=data['username'],
+                password=data['password']
+            )
             if user:
                 login(request, user)
                 return HttpResponseRedirect(reverse('homepage'))
-    else:
-        form = SignUpForm(instance)
-    
     form = SignUpForm()
-    context = {'form': form}
-    return render(request, html, context)
+    return render(request, html, {'form': form})

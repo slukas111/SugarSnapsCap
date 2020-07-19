@@ -12,16 +12,13 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
 
 
-class SignUpForm(UserCreationForm):
+class SignUpForm(forms.Form):
 
     locations = []
 
     first_name = forms.CharField(max_length=100, help_text='First Name')
     last_name = forms.CharField(max_length=100, help_text='Last Name')
+    username = forms.CharField(max_length=100, help_text='username')
+    password = forms.CharField(widget=forms.PasswordInput)
     email = forms.EmailField(max_length=150, help_text='Email')
     location = forms.ModelChoiceField(queryset=Area.objects.all())
-
-    class Meta:
-        model = User
-        fields = ('username', 'first_name', 'last_name',
-                  'email', 'password1', 'password2', 'location',)
