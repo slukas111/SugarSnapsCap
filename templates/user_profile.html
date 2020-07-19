@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 {% load ratings %}
+{% load notifications_tags %}
+{% load i18n %}
 {% block content %}
 
-
+<br><br>
+user:{{request.user}}
+<hr>
 <div class="jumbotron mt-4">
     <h1 class="display-4 text-center">Profile</h1>
     <hr>
@@ -14,13 +18,14 @@
             Joined: {{ user.date_joined|date:"M d, Y" }}
             <br>
             {% ratings user %}
+
         </div>
     </div>
     <hr>
     <p class="lead">{{bio}}</p>
     <hr class="my-4">
     <p class="lead">
-        <a class="btn btn-warning btn-lg" href='/edit/{{user.id}}' role="button">Update</a>
+        <a class="btn btn-warning btn-lg" href='{% url "updateprofile" user.id %}' role="button">Update</a>
     </p>
 </div>
 
@@ -54,19 +59,18 @@
         <button>Following</button>
     </a> {% endcomment %}
         {% comment %}
-        <button><a class="btn btn-info" href="/unfollow/{{id}}/" type="button">Following</button>
+        <button><a class="btn btn-info" href="/unfollow/{{id}}/" type="button">Following</a></button>
         {% endcomment %}
+        {% if not user%}
         <button class="btn btn-outline-success and-all-other-classes" type="button">
-            <a href="/unfollow/{{id}}/" style="color:inherit"> Following </a>
+            <a href="/unfollow/{{id}}/" style="color:inherit"> Unfollow </a>
         </button>
         {%else%}
         <button class="btn btn-outline-success and-all-other-classes" type="button">
             <a href="/follow/{{id}}/" style="color:inherit"> Follow </a>
-            {% comment %} <a href="/follow/{{id}}/">
-            <button>Follow</button>
-        </a> {% endcomment %}
             {%endif%}
         </button>
+        {%endif%}
     </div>
 </div>
 <div class="alert alert-dark mt-4" role="alert">
@@ -74,17 +78,16 @@
 </div>
 
 <div class="card-deck mb-4">
-        {% for post in donations %}
-  <div class="card">
-      <img alt="{{post.title}}" class="card-img-top rounded-lg" src="{{post.image.url}}"  style="height: 100px">
-    <div class="card-body">
-      <h5 class="card-title text-center">{{post.title}}</h5>
-      <p class="card-text"><small class="text-muted">Posted: {{post.date_posted|date:"M d, Y"}}</small></p>
+    {% for post in donations %}
+    <div class="card">
+        <img alt="{{post.title}}" class="card-img-top rounded-lg" src="{{post.image.url}}" style="max-height: 200px">
+        <div class="card-body">
+            <h5 class="card-title text-center">{{post.title}}</h5>
+            <p class="card-text"><small class="text-muted">Posted: {{post.date_posted|date:"M d, Y"}}</small></p>
+        </div>
     </div>
-  </div>
-        {% endfor  %}
+    {% endfor %}
 </div>
-
 
 
 {% endblock content %}

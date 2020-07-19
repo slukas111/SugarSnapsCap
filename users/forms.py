@@ -2,6 +2,7 @@ from django import forms
 
 from users.models import Profile
 
+
 class EditProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
@@ -10,5 +11,3 @@ class EditProfileForm(forms.ModelForm):
             'bio',
             'location'
             ]
-
-

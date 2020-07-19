@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-2 ">
+    <img alt="Responsive image"
+         class="img-fluid" src="https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80">
+    <a class="btn btn-danger btn-lg" href="{% url 'homepage' %}" role="button"
+       style="position: relative;
+    bottom: 42vh;
+    left: 73vh;">Back Home</a>
+</div>
+{% endblock content %}

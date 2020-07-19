@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from users.models import Profile
 from sugar_app.models import BoxItem
 from users.forms import EditProfileForm
+from notifications.signals import notify
 
 
 # Create your views here.
@@ -19,7 +20,8 @@ def user_profile_view(request, user_id):
     donations = BoxItem.objects.filter(profile=user_id).order_by('-id')
     all_followers = request.user.profile.following.all()
     following_count = all_followers.count()
-
+    notification = user.notifications.read()
+    noti = user.notifications.unread()
     context = {
         'donations': donations,
         'id': profile.id,
@@ -29,21 +31,24 @@ def user_profile_view(request, user_id):
         'profile': profile,
         'is_following': profile in all_followers,
         'user': user,
-        'image': profile.profile_image
+        'image': profile.profile_image,
+        'noti': noti,
+        'notification': notification
     }
     return render(request, html, context)
 
 
-def EditUser(request, id):
+def editUser(request, id):
     user = Profile.objects.get(id=id)
     if request.method == 'POST':
-        form = EditProfileForm(request.POST)
+        form = EditProfileForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             data = form.cleaned_data
             user.bio = data['bio']
             user.profile_image = data['profile_image']
             user.save()
             return HttpResponseRedirect(reverse('user_profile', args=(id,)))
+
     form = EditProfileForm(initial={
         'bio': user.bio,
         'profile_image': user.profile_image
@@ -68,7 +73,8 @@ def Follow(request, id):
     following_profile = Profile.objects.get(id=id)
     own_profile.following.add(following_profile)  # and .remove() for unfollow
     own_profile.save()
-
+    message = 'started to following you.'
+    notify.send(sender=own_profile, recipient=following_profile.user, verb=message, description=own_profile.user.id)
     return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))
 
 
@@ -77,8 +83,9 @@ def Unfollow(request, id):
     html = "user_profile.html"
     own_profile = request.user.profile  # or your queryset to get
     following_profile = Profile.objects.get(id=id)
-
     own_profile.following.remove(following_profile)  # and .remove() for unfollow
     own_profile.save()
+    notify.send(sender=own_profile, recipient=following_profile.user, verb='unfollowed you.',
+                description=own_profile.user.id)
 
     return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))

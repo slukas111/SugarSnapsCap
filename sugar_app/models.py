@@ -11,18 +11,6 @@ from users.models import  Profile
 
 
 class Categories(models.Model):
-    # Vegan = 'Vegan'
-    # Vegetarian = 'Vegetarian'
-    # Mixed = 'Mixed'
-    # Test = 'Test'
-    #
-    # CATEGORY_CHOICES = [
-    #     (Vegan, 'vegan'),
-    #     (Vegetarian, 'vegetarian'),
-    #     (Mixed, 'mixed'),
-    #     (Test, 'Test'),
-    # ]
-
     category = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
