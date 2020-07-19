@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'bootstrap4',
     'bootstrap_datepicker_plus',
     'notifications',
+    'sendemail'
+
 ]
 DJANGO_NOTIFICATIONS_CONFIG = { 'SOFT_DELETE': True}
 NOTIFICATIONS_SOFT_DELETE=True
@@ -137,7 +139,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static_deploy")
+STATIC_DIRS = (os.path.join(BASE_DIR, "static"))
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
+
+#Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_HOST ='smtp.gmail.com'
+# EMAIL_PORT = '587'
+# EMAIL_HOST_USER = 'sashamati@gmail.com'
+# EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_SSL = False
+EMAIL_USE_TLS = False
