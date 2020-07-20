@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="jumbotron jumbotron-fluid" style="background-color: floralwhite">
-    <div class="container">
+    <div class="container text-center">
         <h1 class="display-4">Welcome to Sugar Snaps.</h1>
         <footer class="blockquote-footer"><cite title="Source Title">Give what you can, take what you need and pass it
             on.</cite></footer>
@@ -17,10 +17,10 @@
                         {% for category in categories %}
                         <option value="{{category}}">{{category}}</option>
                         {% endfor %}
-                        <option value="reset-filter"><a href="{% url 'homepage' %}">Reset Filter</a></option>
                     </select>
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="submit">Apply Filter</button>
+                        <a href="{% url 'homepage' %}"  class="btn btn-outline-secondary">Reset Filter</a>
                     </div>
                 </div>
             </div>
