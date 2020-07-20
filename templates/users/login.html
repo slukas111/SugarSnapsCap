@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags%}
+
+{% block content %}
+<div class="container" style="width:35%">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron mt-4" style="margin-top:10vh !important;">
+                <h1 class="display-4 text-center">Login Form!</h1>
+                <hr class="my-4">
+                <form action='' method='post'>
+                    {% csrf_token %}
+                    {{ form|crispy}}
+                    <button class="btn btn-primary" type="submit">Login <i class="fas fa-sign-in-alt fa-lg"></i>
+                    </button>
+                    {{error}}
+                </form>
+                <h4>Dont have an account? <a class="btn btn-warning btn-lg" href="{% url 'register' %}">Sign up here! <i
+                        class="fas fa-user-plus fa-lg"></i></a></h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
