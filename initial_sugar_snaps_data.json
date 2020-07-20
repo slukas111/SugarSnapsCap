@@ -1,0 +1,30 @@
+[
+  {
+    "model": "sugar_app.categories",
+    "pk": 1,
+    "fields": {
+      "category": "Mixed"
+    }
+  },
+  {
+    "model": "sugar_app.categories",
+    "pk": 2,
+    "fields": {
+      "category": "Vegetarian"
+    }
+  },
+  {
+    "model": "sugar_app.categories",
+    "pk": 3,
+    "fields": {
+      "category": "Vegan"
+    }
+  },
+   {
+    "model": "sugar_app.categories",
+    "pk": 4,
+    "fields": {
+      "category": "Fruits"
+    }
+  }
+]

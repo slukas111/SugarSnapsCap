@@ -1,0 +1,54 @@
+[
+  {
+    "model": "locations.location",
+    "pk": 1,
+    "fields": {
+      "address": "Corner of 22nd Avenue & East Spruce Street"
+    }
+  },
+  {
+    "model": "locations.area",
+    "pk": 1,
+    "fields": {
+      "area_name": "Central District",
+      "address": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 2,
+    "fields": {
+      "address": "36th Avenue South & South Mt. Baker Blvd"
+    }
+  },
+  {
+    "model": "locations.area",
+    "pk": 2,
+    "fields": {
+      "area_name": "Mt. Baker Area",
+      "address": [
+        2
+      ]
+    }
+  },
+
+  {
+    "model": "locations.location",
+    "pk": 3,
+    "fields": {
+      "address": "35th Ave South between S. Hinds & S. Spokane Street"
+    }
+  },
+  {
+    "model": "locations.area",
+    "pk": 3,
+    "fields": {
+      "area_name": "Mt. Baker Area",
+      "address": [
+        3
+      ]
+    }
+  }
+]
