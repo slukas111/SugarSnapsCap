@@ -3,79 +3,80 @@
 {% load notifications_tags %}
 {% load i18n %}
 {% block content %}
+<div class="container">
+    <div class="jumbotron mt-4">
+        <h1 class="display-4 text-center">Profile</h1>
+        <hr>
+        <div class="row">
+            <div class="col-1"><img alt="{{user}}" class="rounded-circle" src="{{image.url}}"
+                                    style="height: 80px; width: 80px;">
+            </div>
+            <div class="col-4"><h1 class="display-5">{{ user.first_name|capfirst }} {{ user.last_name|capfirst }}</h1>
+                Joined: {{ user.date_joined|date:"M d, Y" }}
+                <br>
+                {% ratings user %}
 
-<div class="jumbotron mt-4">
-    <h1 class="display-4 text-center">Profile</h1>
-    <hr>
-    <div class="row">
-        <div class="col-1"><img alt="{{user}}" class="rounded-circle" src="{{image.url}}"
-                                style="height: 80px; width: 80px;">
+            </div>
         </div>
-        <div class="col-4"><h1 class="display-5">{{ user.first_name|capfirst }} {{ user.last_name|capfirst }}</h1>
-            Joined: {{ user.date_joined|date:"M d, Y" }}
-            <br>
-            {% ratings user %}
-
-        </div>
+        <hr>
+        <p class="lead">{{bio}}</p>
+        <hr class="my-4">
+        <p class="lead">
+            <a class="btn btn-warning btn-lg" href='{% url "updateprofile" user.id %}' role="button">Update</a>
+        </p>
     </div>
-    <hr>
-    <p class="lead">{{bio}}</p>
-    <hr class="my-4">
-    <p class="lead">
-        <a class="btn btn-warning btn-lg" href='{% url "updateprofile" user.id %}' role="button">Update</a>
-    </p>
-</div>
 
-<div class="card bg-light">
-    <div class="card-body">
-        <h4>Support: {{following_count}} </h4>
-        <div class="following-users">
-            {% for followers in all_followers %}
-            <img
-                    alt="{{followers.title}}"
-                    class="rounded-circle mr-2"
-                    src="{{ followers.profile_image.url }}"
-                    style="width: 80px; height: 80px;">
-            <ul style="list-style-type:none">
-                <li>
-                    <a href="/profile/{{followers.id}}">{{followers.user}}</a>
-                </li>
-            </ul>
-            {% endfor %}
-        </div>
-
-        <div class='follow-unfollow'>
-            {% if user.is_authenticated %}
-            {% if profile in all_followers %}
-            {%endif%}
-            {%endif%}
-        </div>
-        {% if is_following %}
-        <button class="btn btn-outline-success and-all-other-classes" type="button">
-            <a href="/unfollow/{{id}}/" style="color:inherit"> Unfollow </a>
-        </button>
-        {%else%}
-        <button class="btn btn-outline-success and-all-other-classes" type="button">
-            <a href="/follow/{{id}}/" style="color:inherit"> Follow </a>
-            {%endif%}
-        </button>
-    </div>
-</div>
-<div class="alert alert-dark mt-4" role="alert">
-    <h5 class="card-title text-center">Donation lists:</h5>
-</div>
-
-<div class="card-deck mb-4">
-    {% for post in donations %}
-    <div class="card">
-        <img alt="{{post.title}}" class="card-img-top rounded-lg" src="{{post.image.url}}" style="max-height: 200px">
+    <div class="card bg-light">
         <div class="card-body">
-            <h5 class="card-title text-center">{{post.title}}</h5>
-            <p class="card-text"><small class="text-muted">Posted: {{post.date_posted|date:"M d, Y"}}</small></p>
+            <h4>Support: {{following_count}} </h4>
+            <div class="following-users">
+                {% for followers in all_followers %}
+                <img
+                        alt="{{followers.title}}"
+                        class="rounded-circle mr-2"
+                        src="{{ followers.profile_image.url }}"
+                        style="width: 80px; height: 80px;">
+                <ul style="list-style-type:none">
+                    <li>
+                        <a href="/profile/{{followers.id}}">{{followers.user}}</a>
+                    </li>
+                </ul>
+                {% endfor %}
+            </div>
+
+            <div class='follow-unfollow'>
+                {% if user.is_authenticated %}
+                {% if profile in all_followers %}
+                {%endif%}
+                {%endif%}
+            </div>
+            {% if is_following %}
+            <button class="btn btn-outline-success and-all-other-classes" type="button">
+                <a href="/unfollow/{{id}}/" style="color:inherit"> Unfollow </a>
+            </button>
+            {%else%}
+            <button class="btn btn-outline-success and-all-other-classes" type="button">
+                <a href="/follow/{{id}}/" style="color:inherit"> Follow </a>
+                {%endif%}
+            </button>
         </div>
     </div>
-    {% endfor %}
-</div>
+    <div class="alert alert-dark mt-4" role="alert">
+        <h5 class="card-title text-center">Donation lists:</h5>
+    </div>
 
+    <div class="card-deck mb-4">
+        {% for post in donations %}
+        <div class="card">
+            <img alt="{{post.title}}" class="card-img-top rounded-lg" src="{{post.image.url}}"
+                 style="max-height: 200px">
+            <div class="card-body">
+                <h5 class="card-title text-center">{{post.title}}</h5>
+                <p class="card-text"><small class="text-muted">Posted: {{post.date_posted|date:"M d, Y"}}</small></p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 
 {% endblock content %}
