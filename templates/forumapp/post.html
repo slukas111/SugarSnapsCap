@@ -3,45 +3,46 @@
 
 {% block content%}
 
+<div class="container mt-3">
+    <div class="card mb-1 mt-3">
+        <div class="card-header">
+            Topic:
+            <a href="{% url 'forumpostdetails' post.slug %}">
+                {{post.title}}</a> <br>
+            <small class="text-muted">Posted by: {{post.author}} | {{post.created_on }}</small>
+        </div>
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
 
-<div class="card mb-1 mt-3">
-    <div class="card-header">
-        Topic:
-        <a href="{% url 'forumpostdetails' post.slug %}">
-            {{post.title}}</a> <br>
-        <small class="text-muted">Posted by: {{post.author}} | {{post.created_on }}</small>
-    </div>
-    <div class="card-body">
-        <blockquote class="blockquote mb-0">
+                <p>{{post.text}}</p>
 
-            <p>{{post.text}}</p>
+                {% for comment in post.comment_set.all%}
+                <footer class="blockquote-footer">{{ comment.text }}<br>
+                    <small title="Source Title">
+                        By:
+                        <a href="{% url 'userposts' comment.author %}">{{comment.author}}</a> |
+                        commented on: {{comment.created_on}}
+                    </small>
+                </footer>
+                {% endfor%}
+            </blockquote>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">POST COMMENT:</small>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{form|crispy}}
+                <textarea name="text" rows="4" style="width:99%"></textarea>
+                <div class="modal-footer">
+                    <button class="btn btn-primary mt-2" type="submit">Post</button>
+                    <a href="{% url 'forum' %}" class="btn btn-warning" role="button"
+                       >Back
+                    </a>
 
-            {% for comment in post.comment_set.all%}
-            <footer class="blockquote-footer">{{ comment.text }}<br>
-                <small title="Source Title">
-                    By:
-                    <a href="{% url 'userposts' comment.author %}">{{comment.author}}</a> |
-                    commented on: {{comment.created_on}}
-                </small>
-            </footer>
-            {% endfor%}
-        </blockquote>
-    </div>
-    <div class="card-footer">
-         <small class="text-muted">POST COMMENT:</small>
-        <form action="" method="POST">
-            {% csrf_token %}
-            {{form|crispy}}
+                </div>
+            </form>
 
-            <textarea name="text" rows="4" style="width:99%"></textarea>
-             <div class="modal-footer">
-            <button class="btn btn-primary mt-2" type="submit">Post</button>
-            <button class="btn btn-warning mt-2" onclick="window.history.back()" >Back</button>
-             </div>
-        </form>
-
+        </div>
     </div>
 </div>
-
-
 {% endblock content%}
