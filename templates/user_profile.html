@@ -4,21 +4,6 @@
 {% load i18n %}
 {% block content %}
 
- {% for notification in request.user.notifications.all%}
-                   {%if notification.verb == ' has reserved '%}
-                    <a class='' href='/post/{{notification.description}}/'>{{notification}}</a>
-
-                     <div class='dropdown-divider'></div>
-                    {%endif%}
-                    {%if notification.verb == 'unfollowed you.'%}
-                    <a class='text-red' href='/profile/{{notification.description}}/'>{{notification}}</a>
-                                         <div class='dropdown-divider'></div>
-                    {%endif%}
-                    {%if notification.verb == 'started to following you.'%}
-                    <a class='text-green' href='/profile/{{notification.description}}/'>{{notification}}</a>
-                                         <div class='dropdown-divider'></div>
-                    {%endif%}
-                    {%endfor%}
 <div class="jumbotron mt-4">
     <h1 class="display-4 text-center">Profile</h1>
     <hr>
@@ -51,7 +36,6 @@
                     class="rounded-circle mr-2"
                     src="{{ followers.profile_image.url }}"
                     style="width: 80px; height: 80px;">
-            {% comment %} <img alt="{{post.title}}" src="{{post.image.url}}" style="height: 80px"> {% endcomment %}
             <ul style="list-style-type:none">
                 <li>
                     <a href="/profile/{{followers.id}}">{{followers.user}}</a>
@@ -67,12 +51,6 @@
             {%endif%}
         </div>
         {% if is_following %}
-        {% comment %} <a href="/unfollow/{{id}}/">
-        <button>Following</button>
-    </a> {% endcomment %}
-        {% comment %}
-        <button><a class="btn btn-info" href="/unfollow/{{id}}/" type="button">Following</a></button>
-        {% endcomment %}
         <button class="btn btn-outline-success and-all-other-classes" type="button">
             <a href="/unfollow/{{id}}/" style="color:inherit"> Unfollow </a>
         </button>

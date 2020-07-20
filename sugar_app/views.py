@@ -20,7 +20,7 @@ class PostListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['categories'] = Categories.objects.all()
-        context['posts'] = BoxItem.objects.all().order_by('-id')
+        # context['posts'] = BoxItem.objects.all().order_by('-id')
         return context
 
     def get_queryset(self):
