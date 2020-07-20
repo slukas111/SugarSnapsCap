@@ -1,4 +1,4 @@
-from django.shortcuts import render, reverse, HttpResponseRedirect, get_object_or_404
+from django.shortcuts import render, reverse, HttpResponseRedirect, get_object_or_404,redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -9,8 +9,27 @@ from sugar_app.models import BoxItem
 from users.forms import EditProfileForm
 from notifications.signals import notify
 
+# new
+
+from django.contrib import messages
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 
 # Create your views here.
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            print(username)
+            messages.success(
+                request, f'Your accout has been created! Now you can login.')
+            return redirect('login')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'users/register.html', {'form': form})
 
 
 def user_profile_view(request, user_id):
