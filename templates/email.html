@@ -1,15 +1,23 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags%}
-
+{% load bootstrap4 %}
 {% block content %}
 
 <h1>Contact Us</h1>
+<div class="cardbody">
+<div class="form-row">
+    <div class="form-group col-md-6 mb-0">
 <form method="post">
-    {% csrf_token %}
-    {{ form|crispy }}
+    {% comment %} {% csrf_token %}
+    {{ form|crispy }} {% endcomment %}
+            {% csrf_token %}
+
+        {% bootstrap_form form %}
     <div class="form-actions">
         <button class="btn btn-success btn-lg" type="submit">Send</button>
+</div>
     </div>
+</div>
+</div>
 </form>
-
 {% endblock %}
