@@ -25,8 +25,11 @@ SECRET_KEY = 'f9)sg=be)%#1patx*wkvzx4m9fya1_8-8__df@_75#dtkd)e78'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
+LOGIN_URL = '/login/'
+
+LOGIN_REDIRECT_URL = 'homepage'
 
 # Application definition
 
@@ -37,8 +40,25 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'sugar_app'
+    'crispy_forms',
+    'sugar_app',
+    'users.apps.UsersConfig',
+    'star_ratings',
+    'locations',
+    'forumapp',
+    'bootstrap4',
+    'bootstrap_datepicker_plus',
+    'notifications',
+    'sendemail'
+
 ]
+DJANGO_NOTIFICATIONS_CONFIG = { 'SOFT_DELETE': True}
+NOTIFICATIONS_SOFT_DELETE=True
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,7 +75,7 @@ ROOT_URLCONF = 'SugarProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,3 +139,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static_deploy")
+STATIC_DIRS = (os.path.join(BASE_DIR, "static"))
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
+
+#Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_HOST ='smtp.gmail.com'
+# EMAIL_PORT = '587'
+# EMAIL_HOST_USER = 'sashamati@gmail.com'
+# EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_SSL = False
+EMAIL_USE_TLS = False
