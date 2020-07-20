@@ -35,7 +35,9 @@
                 <div class="card shadow p-3">
                     <div class="card-img-top"
                          style="background-image: url('{{post.image.url}}'); height: 150px !important;
-    background-size: contain;"></div>
+    background-size:contain;background-repeat: no-repeat;background-position: center;"></div>
+                            <hr class="my-2">
+
                     <div class="card-body">
                         <h5 class="card-title"><a
                                 href="{% url 'postdetail' post.slug  %}">{{post.title|capfirst}} </a><br> <small
