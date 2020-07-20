@@ -1,18 +1,55 @@
 {% extends 'base.html' %}
+{% load social_share %}
+
 {% block content %}
-<h1>Boxitem details</h1>
 
-<h3>Title: {{ object.title }}</h3>
-<p>Description : {{ object.description }}</p>
-<p>Date Posted: {{ object.date_posted|date:"F d, Y" }}</p>
-<p>Expire by: {{object.expiration}}</p>
-<p>Category: {{object.item_category}}</p>
-<p>Status: {{object.que_assign}}</p>
-<img src="{{object.image.url}}" alt="coming soon" style="height: 200px">
-<button onclick="window.history.back()">Back</button>
+<div class="container mt-4">
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-4">{{object.title|capfirst}} details</h1>
+                <small class="text-muted">
+                    Posted by: <a href="{% url 'user_profile' object.profile.id %}">
+                    {{object.profile|capfirst}} </a> | {{object.date_posted|date:"F d,Y"}}</small>
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="row">
+            <div class="col-sm-4">
+                <img alt="coming soon" src="{{object.image.url}}" style="height: 200px">
+            </div>
 
-<a  class="btn btn-outline-secondary" href="{%url 'postupdate' object.id%}">Update</a>
-        <a  class="btn btn-outline-danger" href="{%url 'postdelete' object.id %}">Delete</a>
+            <div class="col-sm-8">
+                <small class="lead text-success">
+                    Category: <strong>{{ object.item_category }}</strong> |
+                    Status: <em>{{object.que_assign}}</em>
+                </small><br>
+                <small class="lead text-danger">
+                    Expiration date: {{object.expiration|date:"F d,Y"}}</small>
+                <hr>
+                <p class="lead">{{object.description}}</p>
+                <hr class="my-4">
+                <p>It uses utility classes for typography and spacing to space content out within the larger
+                    container.</p>
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="text-center">
+            <a class="btn btn-primary btn-lg" href="{% url 'homepage' %}" role="button">Home</a>
+            <a class="btn btn-warning btn-lg" href="{%url 'postupdate' object.id%}">Update</a>
+            <a class="btn btn-danger btn-lg" href="{%url 'postdelete' object.id %}">Delete</a>
+
+            <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary"
+                    data-toggle="dropdown" id="dropdownMenuButton" type="button">
+                <i class="fas fa-share-alt fa-3x"></i>
+            </button>
+            <div aria-labelledby="dropdownMenuButton" class="dropdown-menu" >
+                {% post_to_facebook object_or_url '<i class="fab fa-facebook fa-3x"></i>' %}
+            </div>
+        </div>
+
+    </div>
+</div>
 
 {% endblock content %}
 

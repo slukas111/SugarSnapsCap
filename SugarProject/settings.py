@@ -57,7 +57,8 @@ INSTALLED_APPS = [
     'bootstrap4',
     'bootstrap_datepicker_plus',
     'notifications',
-    'sendemail'
+    'sendemail',
+    'django_social_share'
 
 ]
 DJANGO_NOTIFICATIONS_CONFIG = { 'SOFT_DELETE': True}
