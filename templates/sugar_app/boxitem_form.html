@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
-{% block content %}
 {% load bootstrap4 %}
-{% bootstrap_css %}
+{% comment %} {% bootstrap_css %} {% endcomment %}
 {% bootstrap_javascript jquery='full' %}
 {{ form.media }}
 {% load crispy_forms_tags%}
 
+{% block content %}
 
 <div class="container">
     <div class="card mt-4">
@@ -17,6 +17,5 @@
         </form>
     </div>
 </div>
-
 
 {% endblock content %}
