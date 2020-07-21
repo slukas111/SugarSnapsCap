@@ -15,7 +15,6 @@
             Joined: {{ user.date_joined|date:"M d, Y" }}
             <br>
             {% ratings user %}
-
         </div>
     </div>
     <hr>
@@ -24,6 +23,15 @@
     <p class="lead">
         <a class="btn btn-warning btn-lg" href='{% url "updateprofile" user.id %}' role="button">Update</a>
     </p>
+</div>
+<div class="container">
+    <h2>Resverved</h2>
+    {{request.user.profile_reser}}
+    {% for r in reserve_box.reserve.all%}
+    <p>f</p>
+    {{r.reserve.all}}
+    <hr>
+    {%endfor%}
 </div>
 
 <div class="card bg-light">
