@@ -19,6 +19,8 @@ from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 
 
 def register(request):
+    if request.user.is_authenticated():
+        return redirect('homepage')
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
@@ -37,7 +39,6 @@ def user_profile_view(request, user_id):
     html = 'user_profile.html'
     profile = User.objects.get(id=user_id).profile
     user = User.objects.get(id=user_id)
-    reserve_box = BoxItem.objects.all()
     donations = BoxItem.objects.filter(profile=user_id).order_by('-id')
     all_followers = request.user.profile.following.all()
     following_count = all_followers.count()
@@ -54,8 +55,7 @@ def user_profile_view(request, user_id):
         'user': user,
         'image': profile.profile_image,
         'noti': noti,
-        'notification': notification,
-        'reserve_box':reserve_box
+        'notification': notification
     }
     return render(request, html, context)
 
