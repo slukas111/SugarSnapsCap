@@ -89,6 +89,14 @@ version = "1.9.1"
 
 [[package]]
 category = "main"
+description = "Django-environ allows you to utilize 12factor inspired environment variables to configure your Django application."
+name = "django-environ"
+optional = false
+python-versions = "*"
+version = "0.4.5"
+
+[[package]]
+category = "main"
 description = "Django model mixins and utilities"
 name = "django-model-utils"
 optional = false
@@ -112,6 +120,14 @@ django-model-utils = ">=3.1.0"
 jsonfield = ">=2.1.0"
 pytz = "*"
 swapper = "*"
+
+[[package]]
+category = "main"
+description = "Templatetags for 'tweet this' and 'share on facebook'"
+name = "django-social-share"
+optional = false
+python-versions = "*"
+version = "1.4.0"
 
 [[package]]
 category = "main"
@@ -187,7 +203,7 @@ python-versions = "*"
 version = "1.1.2.post1"
 
 [metadata]
-content-hash = "f95de64763fbb26bdf220cde455eec7df9f93942c1a4fba7757a3d744326114d"
+content-hash = "3e25b08d65449d2f1f6c7570053a953b23785a0dbcaa4816afb2d24dd5e1b1ad"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -220,6 +236,10 @@ django-crispy-forms = [
     {file = "django-crispy-forms-1.9.1.tar.gz", hash = "sha256:fbe9c2c9698b6590afe37940cb08194d1e722015f6bc5bee83f679362406ea30"},
     {file = "django_crispy_forms-1.9.1-py2.py3-none-any.whl", hash = "sha256:ad943285508f0ed0e271d00399b9399c22b8795a4f969029bce0fd29522a8e2d"},
 ]
+django-environ = [
+    {file = "django-environ-0.4.5.tar.gz", hash = "sha256:6c9d87660142608f63ec7d5ce5564c49b603ea8ff25da595fd6098f6dc82afde"},
+    {file = "django_environ-0.4.5-py2.py3-none-any.whl", hash = "sha256:c57b3c11ec1f319d9474e3e5a79134f40174b17c7cc024bbb2fad84646b120c4"},
+]
 django-model-utils = [
     {file = "django-model-utils-4.0.0.tar.gz", hash = "sha256:adf09e5be15122a7f4e372cb5a6dd512bbf8d78a23a90770ad0983ee9d909061"},
     {file = "django_model_utils-4.0.0-py2.py3-none-any.whl", hash = "sha256:9cf882e5b604421b62dbe57ad2b18464dc9c8f963fc3f9831badccae66c1139c"},
@@ -227,6 +247,10 @@ django-model-utils = [
 django-notifications-hq = [
     {file = "django-notifications-hq-1.6.0.tar.gz", hash = "sha256:debeb71b7076b08487b40bf07664d1cc43b9977c4480bbc969b30236dda7a461"},
     {file = "django_notifications_hq-1.6.0-py2.py3-none-any.whl", hash = "sha256:dfc6f8bd4034ceae91143bc3802ddfb6e276eaec90e63dd23e2584c052561576"},
+]
+django-social-share = [
+    {file = "django-social-share-1.4.0.tar.gz", hash = "sha256:605f96810a4f736df8113c8da6f65307e4f53bec5c7af28ba08095e49778c3de"},
+    {file = "django_social_share-1.4.0-py2.py3-none-any.whl", hash = "sha256:74a472a61b33992f03db339a76978cdc379a41d86437451ab64e686f3a6ddb63"},
 ]
 django-star-ratings = [
     {file = "django-star-ratings-0.9.1.tar.gz", hash = "sha256:ec6dca90cc2f195353ba073c0daa84207640155bbc9ee46155c95efc6d37a787"},

@@ -8,14 +8,15 @@
 {% load crispy_forms_tags%}
 
 
-
-<div class="card mt-4">
-    <form enctype='multipart/form-data' method="post" class="p-2">
-        {% csrf_token %}
-<!--        {{form|crispy}}-->
-        {% bootstrap_form form %}
-        <button class="btn btn-primary btn-block" type="submit">Post</button>
-    </form>
+<div class="container">
+    <div class="card mt-4">
+        <form class="p-2" enctype='multipart/form-data' method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <button class="btn btn-primary btn-block" type="submit">Post</button>
+        </form>
+    </div>
 </div>
+
 
 {% endblock content %}

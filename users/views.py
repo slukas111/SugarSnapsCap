@@ -3,6 +3,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from users.models import Profile
 from sugar_app.models import BoxItem
@@ -18,6 +19,8 @@ from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 
 
 def register(request):
+    if request.user.is_authenticated():
+        return redirect('homepage')
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
