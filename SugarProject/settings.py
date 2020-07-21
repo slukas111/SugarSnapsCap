@@ -17,6 +17,7 @@ env = environ.Env()
 environ.Env.read_env()
 # Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
 SECRET_KEY = env("SECRET_KEY")
+# SECRET_KEY = 'f9)sg=be)%#1patx*wkvzx4m9fya1_8-8__df@_75#dtkd)e78'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
