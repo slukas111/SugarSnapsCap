@@ -15,6 +15,7 @@ django-star-ratings = "^0.9.1"
 django-notifications-hq = "^1.6.0"
 django-environ = "^0.4.5"
 django-social-share = "^1.4.0"
+whitenoise = "^5.1.0"
 
 
 [tool.poetry.dev-dependencies]
