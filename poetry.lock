@@ -123,6 +123,14 @@ swapper = "*"
 
 [[package]]
 category = "main"
+description = "Templatetags for 'tweet this' and 'share on facebook'"
+name = "django-social-share"
+optional = false
+python-versions = "*"
+version = "1.4.0"
+
+[[package]]
+category = "main"
 description = "A Django app to add star ratings to models."
 name = "django-star-ratings"
 optional = false
@@ -195,7 +203,7 @@ python-versions = "*"
 version = "1.1.2.post1"
 
 [metadata]
-content-hash = "2f038be4b0bfed3129136ca3421274717e38763e314af0091bc89e823169e19b"
+content-hash = "3e25b08d65449d2f1f6c7570053a953b23785a0dbcaa4816afb2d24dd5e1b1ad"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -239,6 +247,10 @@ django-model-utils = [
 django-notifications-hq = [
     {file = "django-notifications-hq-1.6.0.tar.gz", hash = "sha256:debeb71b7076b08487b40bf07664d1cc43b9977c4480bbc969b30236dda7a461"},
     {file = "django_notifications_hq-1.6.0-py2.py3-none-any.whl", hash = "sha256:dfc6f8bd4034ceae91143bc3802ddfb6e276eaec90e63dd23e2584c052561576"},
+]
+django-social-share = [
+    {file = "django-social-share-1.4.0.tar.gz", hash = "sha256:605f96810a4f736df8113c8da6f65307e4f53bec5c7af28ba08095e49778c3de"},
+    {file = "django_social_share-1.4.0-py2.py3-none-any.whl", hash = "sha256:74a472a61b33992f03db339a76978cdc379a41d86437451ab64e686f3a6ddb63"},
 ]
 django-star-ratings = [
     {file = "django-star-ratings-0.9.1.tar.gz", hash = "sha256:ec6dca90cc2f195353ba073c0daa84207640155bbc9ee46155c95efc6d37a787"},

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+
 <div class="jumbotron jumbotron-fluid" style="background-color: floralwhite">
     <div class="container text-center">
         <h1 class="display-4">Welcome to Sugar Snaps.</h1>
@@ -22,6 +23,7 @@
                         <button class="btn btn-outline-secondary" type="submit">Apply Filter</button>
                         <a href="{% url 'homepage' %}"  class="btn btn-outline-secondary">Reset Filter</a>
                     </div>
+
                 </div>
             </div>
         </form>
@@ -31,13 +33,13 @@
     <div class="container">
         <div class="row">
             {% for post in posts %}
+
             <div class="col-12 col-lg-4 col-md-6 mt-4">
                 <div class="card shadow p-3">
                     <div class="card-img-top"
                          style="background-image: url('{{post.image.url}}'); height: 150px !important;
     background-size:contain;background-repeat: no-repeat;background-position: center;"></div>
                             <hr class="my-2">
-
                     <div class="card-body">
                         <h5 class="card-title"><a
                                 href="{% url 'postdetail' post.slug  %}">{{post.title|capfirst}} </a><br> <small
