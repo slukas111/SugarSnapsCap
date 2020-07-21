@@ -42,8 +42,14 @@
                 <i class="fas fa-share-alt fa-3x"></i>
             </button>
             <div aria-labelledby="dropdownMenuButton" class="dropdown-menu" >
-                {% post_to_facebook object_or_url '<i class="fab fa-facebook fa-3x"></i>' %}
-            </div>
+                {% post_to_facebook object_or_url 'Share to Facebook' %}
+                {% post_to_twitter "Box item: {{object.title}}. Check it out!" object_or_url "Share to Twitter" %}
+                {% post_to_linkedin object.title object_or_url "Share to LinkedIn" %}
+                {% send_email object.title "Box item: {{object.title}}. Check it out!" object_or_url "Share via email" %}
+                {% post_to_reddit "Box item: {{object.title}}" object_or_url  "Share via reddit" %}
+
+                </div>
+
         </div>
     </div>
 </div>
