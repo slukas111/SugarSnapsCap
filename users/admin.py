@@ -3,4 +3,7 @@ from .models import Profile
 
 # Register your models here.
 
-admin.site.register(Profile)
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'bio', 'location')
+    list_editable = ('location',)
