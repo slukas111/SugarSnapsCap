@@ -43,7 +43,6 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         form = super().get_form()
         form.fields['expiration'].widget = DatePickerInput()
         notify.send(sender=self.request.user, recipient=self.request.user, verb='donation posted')
-
         return form
 
     def form_valid(self, form):

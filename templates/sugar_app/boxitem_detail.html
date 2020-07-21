@@ -45,30 +45,7 @@
                 {% post_to_facebook object_or_url '<i class="fab fa-facebook fa-3x"></i>' %}
             </div>
         </div>
-
     </div>
-
-<h1>Donation Box</h1>
-            <div class="col-12 col-lg-4 col-md-6 mt-4">
-                <div class="card shadow p-3">
-                    <div class="card-img-top"
-<div class="card-body">
-        <h3>Title: {{ object.title }}</h3>
-        <p>Description : {{ object.description }}</p>
-        <p>Date Posted: {{ object.date_posted|date:"F d, Y" }}</p>
-        <p>Expire by: {{object.expiration}}</p>
-        <p>Category: {{object.item_category}}</p>
-        <p>Status: {{object.que_assign}}</p>
-<center><img src="{{object.image.url}}" alt="coming soon" style="height: 200px"></center>
 </div>
-</div>
-<center>
-<a  class="btn btn-outline-secondary" href="{%url 'homepage'%}">Home</a>
-<a  class="btn btn-outline-secondary" href="{%url 'postupdate' object.id%}">Update</a>
-<a  class="btn btn-outline-danger" href="{%url 'postdelete' object.id %}">Delete</a>
-</center>
-</div>
-</div>
-
 {% endblock content %}
 
