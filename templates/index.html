@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="jumbotron jumbotron-fluid" style="background-color: floralwhite">
+    <div class="container">
+        <h1 class="display-4">Welcome to Sugar Snaps.</h1>
+        <footer class="blockquote-footer"><cite title="Source Title">Give what you can, take what you need and pass it
+            on.</cite></footer>
+        <hr class="my-4">
+                    <!--fixing filter-->
+        <form action='.' method='GET'>
+            <div class="btn-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Filter by: </label>
+                    </div>
+                    <select class="custom-select" id="inputGroupSelect01" name="filter">
+                        <option selected>Choose...</option>
+                        {% for category in categories %}
+                        <option value="{{category}}">{{category}}</option>
+                        {% endfor %}
+                        <option value="reset-filter"><a href="{% url 'homepage' %}">Reset Filter</a></option>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">Apply Filter</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <hr class="my-4">
+    </div>
+
+    <div class="container">
+        <div class="row">
+            {% for post in posts %}
+            <div class="col-12 col-lg-4 col-md-6 mt-4">
+                <div class="card shadow p-3">
+                    <div class="card-img-top"
+                         style="background-image: url('{{post.image.url}}'); height: 150px !important;
+    background-size:contain;background-repeat: no-repeat;background-position: center;"></div>
+                            <hr class="my-2">
+
+                    <div class="card-body">
+                        <h5 class="card-title"><a
+                                href="{% url 'postdetail' post.slug  %}">{{post.title|capfirst}} </a><br> <small
+                                class="text-muted">
+                            {{post.que_assign}}
+                        </small>
+                        </h5>
+                        <p class="card-text" style="
+    height: 73px;
+    overflow: scroll;"> {{post.description}} </p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Posted by:
+                            <a href="{% url 'user_profile' post.profile.id %}">{{post.profile}}</a>
+                            <br>
+                            <small class="text-muted">{{post.date_posted}}
+                            </small></li>
+                    </ul>
+                    <div class="card-body">
+                        {% if post.profile != user %}
+                        {% if user.profile in post.reserve.all %}
+                        <button class="btn btn-success btn-lg active btn-block text-warning" disabled>Reserved
+                        </button>
+                        {% else %}
+                        <a class="btn btn-success btn-lg active btn-block"
+                           href="{% url 'reserve' post.slug %}">Reserve</a>
+                        {% endif %}
+                        {% else %}
+
+                        <button class="btn btn-secondary btn-lg active btn-block " disabled>Your Listing
+                        </button>
+                        {% endif%}
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
