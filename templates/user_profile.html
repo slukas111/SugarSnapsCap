@@ -100,15 +100,20 @@
                 {% if profile in all_followers %}
                 {%endif%}
                 {%endif%}
-            {% if is_following %}
-            <button class="btn btn-outline-success and-all-other-classes" type="button">
-                <a href="/unfollow/{{id}}/" style="color:inherit"> Unfollow </a>
-            </button>
-            {%else%}
-            <button class="btn btn-outline-success and-all-other-classes" type="button">
-                <a href="/follow/{{id}}/" style="color:inherit"> Follow </a>
-                {%endif%}
-            </button>
+
+                 {% if request.user == profile.user%}
+                        <hr>
+                        {%else%}
+                        {% if is_following %}
+                        <button class="btn btn-outline-success and-all-other-classes" type="button">
+                            <a href="/unfollow/{{id}}/" style="color:inherit"> Unfollow </a>
+                        </button>
+                        {%else%}
+                        <button class="btn btn-outline-success and-all-other-classes" type="button">
+                            <a href="/follow/{{id}}/" style="color:inherit"> Follow </a>
+                            {%endif%}
+                        </button>
+                        {%endif%}
             </div>
             </div>
             </div>
