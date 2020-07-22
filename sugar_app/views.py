@@ -93,4 +93,8 @@ def reserve(request, slug):
 
 
 def bad_request(request, exception):
-    return page_not_found(request, exception, template_name="error_404.html")
+    return page_not_found(request, exception, template_name="404.html")
+
+
+def bad_request_500(request):
+    return render(request, template_name="500.html")
