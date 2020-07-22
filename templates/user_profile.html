@@ -73,43 +73,28 @@
 
             <div classs="row">
             <div class="col-12 col-lg-8 col-md-6">
+            <div class="d-inline">
+            <ul>
+
                 {% for followers in all_followers %}
-                <span class="stext-105 cl3">
+
                 <img
                         alt="{{followers.title}}"
                         class="rounded-circle mr-2"
                         src="{{ followers.profile_image.url }}"
                         style="width: 80px; height: 80px;">
-                <ul style="list-style-type:none">
-                </span>
-
-                    <li>
+            
                         <a href="/profile/{{followers.id}}">{{followers.user}}</a>
-                    </li>
-                </ul>
                 {% endfor %}
+  
+                </ul>
+                <br>
             </div>
              </div>
              </div> 
              </div>
+             </div>
 
- {% comment %} <div class="carousel slide" data-ride="carousel">
-                {% for followers in all_followers %}     
-        <div class="followers{% if forloop.first %} active{% endif %}">
-            <img
-                        alt="{{followers.title}}"
-                        class="rounded-circle mr-2"
-                        src="{{ followers.profile_image.url }}"
-                        style="width: 80px; height: 80px;">
-                <ul style="list-style-type:none">
-                    <li>
-              <a href="/profile/{{followers.id}}">{{followers.user}}</a>
-              <div class="carousel-caption capt">
-                  <h1>{{slider.caption}}</h1>
-              </div>
-        </div>
-    {%endfor%}
-</div> {% endcomment %}
             <div class='follow-unfollow'>
                 {% if user.is_authenticated %}
                 {% if profile in all_followers %}
