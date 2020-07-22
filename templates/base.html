@@ -19,7 +19,7 @@
     <script src="https://kit.fontawesome.com/376d9e7b35.js" crossorigin="anonymous"></script>
 
 </head>
-<style>
+{% comment %} <style>
     .popover{
     min-width: 10%;
     min-heigh: 1%;
@@ -29,11 +29,11 @@
     background: #343a40!important;
 }
 
-</style>
+</style> {% endcomment %}
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <p style="font-family: 'Lobster', cursive;font-size:32px;font-style:italic;color:white;">
+    <p style="font-family: 'Lobster', cursive;font-size:36px;font-style:italic;color:yellow;">
         Sugar Snaps
     </p>
     <button class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
@@ -45,18 +45,18 @@
                 <a class="nav-link" href="{% url 'homepage' %}">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'postcreate' %}">Donate 📦</a>
+                <a class="nav-link" href="{% url 'postcreate' %}"><span class="fa fa-archive" aria-hidden="true"></span> Donate </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'forum' %}">Forum 🆕</a>
+                <a class="nav-link" href="{% url 'forum' %}"><span class="fa fa-comments-o" aria-hidden="true"></span> Forum</a>
             </li>
 
             {% if request.user.is_authenticated %}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdown"
-                   role="button">
-                    Your Profile 👤
+                   role="button"><span class="fa fa-user" aria-hidden="true"></span>
+                     Your Profile 
                 </a>
 
                 <div aria-labelledby="navbarDropdown" class="dropdown-menu">
@@ -89,13 +89,13 @@
                    id="example-body"
                    rel="popover"
                    style="cursor: pointer;"
-                   tabindex="0">
+                   tabindex="0"><span class="fa fa-bell" aria-hidden="true"></span>
                     Notifications
                 </a>
             </li>
             {% endif %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+                <a class="nav-link" href="{% url 'contact' %}"><span class="fa fa-envelope-o" aria-hidden="true"></span> Contact Us</a>
             </li>
             {% if request.user.is_authenticated %}
 
