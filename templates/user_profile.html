@@ -3,53 +3,118 @@
 {% load notifications_tags %}
 {% load i18n %}
 {% block content %}
-<div class="container">
-    <div class="jumbotron mt-4">
-        <h1 class="display-4 text-center">Profile</h1>
-        <hr>
-        <div class="row">
-            <div class="col-1"><img alt="{{user}}" class="rounded-circle" src="{{image.url}}"
-                                    style="height: 80px; width: 80px;">
-            </div>
-            <div class="col-4"><h1 class="display-5">{{ user.first_name|capfirst }} {{ user.last_name|capfirst }}</h1>
-                Joined: {{ user.date_joined|date:"M d, Y" }}
-                <br>
-                {% ratings user %}
 
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="card" style="width: 1100px; height: auto 325px; ">
+                <div class="card-body">
+                    <div class="row">
+
+                        <div class="col-12 col-lg-8 col-md-6">
+                            <h3 class="mb-0 text-truncated">User: {{user}}</h3>
+                            <p class="lead">EMT Fireman</p>
+                            <p>
+                                {{bio}}
+                            </p>
+                            <br></br>
+                            Earned Badges
+                            <p> <span class="badge badge-info tags">Military</span> 
+                                <span class="badge badge-info tags">Schools</span>
+                                <span class="badge badge-info tags">Neighbor</span>
+                            </p>
+                                            Joined: {{ user.date_joined|date:"M d, Y" }}
+                        </div>
+                        <div class="col-12 col-lg-4 col-md-6 text-center">
+                            <img src="{{image.url}}" alt="" class="mx-auto rounded-circle img-fluid" style="auto">
+                            <br>
+                            {% ratings user %}
+
+                        </div>
+                        <div class="col-12 col-lg-4">
+                            <h3 class="mb-0">{{following_count}}</h3>
+                            <small>Followers</small>
+                        </div>
+                        <div class="col-12 col-lg-4">
+                            <h3 class="mb-0">245</h3>
+                            <small>Donations</small>
+                        </div>
+                        <div class="col-12 col-lg-4">
+                            <h3 class="mb-0"></h3>
+                            <p></p>
+                            <small>Update Your Profile</small>
+                            <a href='{% url "updateprofile" user.id %}' class="btn btn-outline-primary btn-block" role="button"><span class="fa fa-gear"></span> Options</a>
+                        </div>
+                        <!--/col-->
+                    </div>
+                    <!--/row-->
+                </div>
+                <!--/card-block-->
             </div>
         </div>
-        <hr>
-        <p class="lead">{{bio}}</p>
-        <hr class="my-4">
-        <p class="lead">
-            <a class="btn btn-warning btn-lg" href='{% url "updateprofile" user.id %}' role="button">Update</a>
-        </p>
     </div>
+</div>
 
-    <div class="card bg-light">
-        <div class="card-body">
-            <h4>Support: {{following_count}} </h4>
-            <div class="following-users">
+
+
+<div class="container">
+    <div class="row"> 
+        <div class="col-sm-4"> 
+            <div class="card" style="width: 1100px; height: auto 325px; ">
+                <div class="card-body">
+                    <div class="row">
+                                            
+                                            
+            <div class="col-12 col-lg-8 col-md-6">
+                    <h3 class="mb-0 text-truncated">Snap Circle </h3>
+
+
+            <p class="lead">Following {{following_count}} </p>
+
+            <div classs="row">
+            <div class="col-12 col-lg-8 col-md-6">
                 {% for followers in all_followers %}
+                <span class="stext-105 cl3">
                 <img
                         alt="{{followers.title}}"
                         class="rounded-circle mr-2"
                         src="{{ followers.profile_image.url }}"
                         style="width: 80px; height: 80px;">
                 <ul style="list-style-type:none">
+                </span>
+
                     <li>
                         <a href="/profile/{{followers.id}}">{{followers.user}}</a>
                     </li>
                 </ul>
                 {% endfor %}
             </div>
+             </div>
+             </div> 
+             </div>
 
+ {% comment %} <div class="carousel slide" data-ride="carousel">
+                {% for followers in all_followers %}     
+        <div class="followers{% if forloop.first %} active{% endif %}">
+            <img
+                        alt="{{followers.title}}"
+                        class="rounded-circle mr-2"
+                        src="{{ followers.profile_image.url }}"
+                        style="width: 80px; height: 80px;">
+                <ul style="list-style-type:none">
+                    <li>
+              <a href="/profile/{{followers.id}}">{{followers.user}}</a>
+              <div class="carousel-caption capt">
+                  <h1>{{slider.caption}}</h1>
+              </div>
+        </div>
+    {%endfor%}
+</div> {% endcomment %}
             <div class='follow-unfollow'>
                 {% if user.is_authenticated %}
                 {% if profile in all_followers %}
                 {%endif%}
                 {%endif%}
-            </div>
             {% if is_following %}
             <button class="btn btn-outline-success and-all-other-classes" type="button">
                 <a href="/unfollow/{{id}}/" style="color:inherit"> Unfollow </a>
@@ -59,9 +124,13 @@
                 <a href="/follow/{{id}}/" style="color:inherit"> Follow </a>
                 {%endif%}
             </button>
-        </div>
-    </div>
-    <div class="alert alert-dark mt-4" role="alert">
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+
+<div class="alert alert-dark mt-4" role="alert">
         <h5 class="card-title text-center">Donation lists:</h5>
     </div>
 
@@ -77,6 +146,24 @@
         </div>
         {% endfor %}
     </div>
-</div>
+</div> 
 
-{% endblock content %}
+{% comment %} <div class="alert alert-dark mt-4" role="alert">
+        <h5 class="card-title text-center">Reserved Boxes</h5>
+    </div>
+
+    <div class="card-deck mb-4">
+        {% for post in donations %}
+        <div class="card">
+            <img alt="{{post.title}}" class="card-img-top rounded-lg" src="{{post.image.url}}"
+                 style="max-height: 200px">
+            <div class="card-body">
+                <h5 class="card-title text-center">{{post.title}}</h5>
+                <p class="card-text"><small class="text-muted">Posted: {{post.date_posted|date:"M d, Y"}}</small></p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>  {% endcomment %}
+
+{% endblock content %} 
