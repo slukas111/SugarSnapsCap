@@ -19,8 +19,8 @@
 
         <hr class="my-4">
         <div class="row">
-            <div class="col-sm-4">
-                <img alt="coming soon" src="{{object.image.url}}" style="height: 200px">
+            <div class="col-sm-6 col-12">
+                <img alt="coming soon" src="{{object.image.url}}" style="height: 200px;">
             </div>
 
             <div class="row">
@@ -45,7 +45,7 @@
             <div class="card" style="width: 900px; height: auto 325px; margin: 20px">
                 <div class="card-horizontal">
                     <div class="img-square-wrapper">
-                    <img alt="coming soon" src="{{object.image.url}}" class="img-fluid" style="height: 200px">
+                    <img alt="coming soon" src="{{object.image.url}}"  style="height: 200px">
                         {% comment %} <img class="" src="http://via.placeholder.com/300x180" alt="Card image cap"> {% endcomment %}
                     </div>
                     <div class="card-body">
@@ -90,14 +90,6 @@
                 {% send_email object.title "Box item: {{object.title}}. Check it out!" object_or_url "Share via email" %}
                 {% post_to_reddit "Box item: {{object.title}}" object_or_url  "Share via reddit" %}
                 </div>
-
-
-
-
-
-
-
-
 
 
 {% endblock content %}

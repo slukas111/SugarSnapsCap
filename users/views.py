@@ -13,9 +13,25 @@ from notifications.signals import notify
 # new
 
 from django.contrib import messages
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from .forms import UserRegisterForm, UserDeleteForm
 
 # Create your views here.
+
+
+@login_required
+def deleteuser(request):
+    if request.method == 'POST':
+        delete_form = UserDeleteForm(request.POST, instance=request.user)
+        user = request.user
+        user.delete()
+        messages.info(request, 'Your account has been deleted.')
+        return redirect('login')
+    else:
+        delete_form = UserDeleteForm(instance=request.user)
+    context = {
+        'delete_form': delete_form
+    }
+    return render(request, 'users/delete_account.html', context)
 
 
 def register(request):
@@ -62,20 +78,22 @@ def user_profile_view(request, user_id):
 
 def editUser(request, id):
     user = Profile.objects.get(id=id)
-    if request.method == 'POST':
-        form = EditProfileForm(request.POST or None, request.FILES or None)
-        if form.is_valid():
-            data = form.cleaned_data
-            user.bio = data['bio']
-            user.profile_image = data['profile_image']
-            user.save()
-            return HttpResponseRedirect(reverse('user_profile', args=(id,)))
+    if request.user.id == user.id:
+        if request.method == 'POST':
+            form = EditProfileForm(request.POST or None, request.FILES or None)
+            if form.is_valid():
+                data = form.cleaned_data
+                user.bio = data['bio']
+                user.profile_image = data['profile_image']
+                user.save()
+                return HttpResponseRedirect(reverse('user_profile', args=(id,)))
 
-    form = EditProfileForm(initial={
-        'bio': user.bio,
-        'profile_image': user.profile_image
-    })
-    return render(request, 'editUser.html', {'form': form})
+        form = EditProfileForm(initial={
+            'bio': user.bio,
+            'profile_image': user.profile_image
+        })
+        return render(request, 'editUser.html', {'form': form})
+    return redirect('/')
 
 
 class UserPostListView(ListView):

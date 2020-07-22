@@ -15,10 +15,9 @@ class LoginForm(forms.Form):
 class SignUpForm(forms.Form):
 
     locations = []
-
-    first_name = forms.CharField(max_length=100, help_text='First Name')
-    last_name = forms.CharField(max_length=100, help_text='Last Name')
-    username = forms.CharField(max_length=100, help_text='username')
+    first_name = forms.CharField(max_length=100 )
+    last_name = forms.CharField(max_length=100)
+    username = forms.CharField(max_length=100)
     password = forms.CharField(widget=forms.PasswordInput)
-    email = forms.EmailField(max_length=150, help_text='Email')
+    email = forms.EmailField(max_length=150)
     location = forms.ModelChoiceField(queryset=Location.objects.all())

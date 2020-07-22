@@ -39,6 +39,7 @@
                             <h3 class="mb-0">{{donations.count}}</h3>
                             <small>Donations</small>
                         </div>
+                        {%if request.user == user%}
                         <div class="col-12 col-lg-4">
                             <h3 class="mb-0"></h3>
                             <p></p>
@@ -46,6 +47,7 @@
                             <a class="btn btn-outline-primary btn-block" href='{% url "updateprofile" user.id %}'
                                role="button"><span class="fa fa-gear"></span> Options</a>
                         </div>
+                        {%endif%}
                         <!--/col-->
                     </div>
                     <!--/row-->
