@@ -95,19 +95,24 @@
                     {% comment %}
                     <div class="carousel slide" data-ride="carousel">
                         {% for followers in all_followers %}
-                        <div class="followers{% if forloop.first %} active{% endif %}">
-                            <img
-                                    alt="{{followers.title}}"
-                                    class="rounded-circle mr-2"
-                                    src="{{ followers.profile_image.url }}"
-                                    style="width: 80px; height: 80px;">
-                            <ul style="list-style-type:none">
-                                <li>
-                                    <a href="/profile/{{followers.id}}">{{followers.user}}</a>
-                                    <div class="carousel-caption capt">
-                                        <h1>{{slider.caption}}</h1>
-                                    </div>
+                        <div class="col-sm-3">
+
+                            <div class="followers{% if forloop.first %} active{% endif %}">
+                                <img
+                                        alt="{{followers.title}}"
+                                        class="rounded-circle mr-2"
+                                        src="{{ followers.profile_image.url }}"
+                                        style="width: 80px; height: 80px;">
+                                <ul style="list-style-type:none">
+                                    <li>
+                                        <a href="/profile/{{followers.id}}">{{followers.user}}</a>
+                                        <div class="carousel-caption capt">
+                                            <h1>{{slider.caption}}</h1>
+                                        </div>
+                                    </li>
+                            </div>
                         </div>
+
                         {%endfor%}
                     </div>
                     {% endcomment %}
@@ -119,7 +124,7 @@
                         {% if request.user == profile.user%}
                         <hr>
                         {%else%}
-                         {% if is_following %}
+                        {% if is_following %}
                         <button class="btn btn-outline-success and-all-other-classes" type="button">
                             <a href="/unfollow/{{id}}/" style="color:inherit"> Unfollow </a>
                         </button>
