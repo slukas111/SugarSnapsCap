@@ -11,14 +11,6 @@ h1{
     color: white;
 }
 
-/* nav{
-
-    color: yellow;
-    font-family: 'Lobster', cursive;
-    font-size:36px;
-    font-style:italic;
-} */
-
 .popover{
     min-width: 10%;
     min-height: 1%;
@@ -28,34 +20,13 @@ h1{
     background: #343a40!important;
 }
 
-/* .rounded-circle{
-    height: 140px; 
-    width: 140px;
-    margin: auto 20px; 
-    padding: 20px;
-
-} */
 .card{
-    /* width: 800px;
-    height: 325px;
-    margin: 40px; */
     width:100%;
     height:auto;
     margin: 10px;
 } 
 
-
-/* .container-bcontent{
-    width: 600px;
-    height: 400px;
-    color: red;
-} */
-/* .card-img{
-    height: 140px; 
-    width: 140px;
-} */
-/* .card-body{
-    width: 600px;
-    height: 400px;
-
-} 
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}

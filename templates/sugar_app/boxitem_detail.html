@@ -3,23 +3,29 @@
 
 {% block content %}
 
-<div class="container mt-4">
-    <div class="jumbotron">
-        <div class="row">
+{% comment %} <div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="card" style="width: 850px; height: auto 325px; ">
+                <div class="card-body">
+                    <div class="row">
             <div class="col-12 text-center">
-                <h1 class="display-4">{{object.title|capfirst}} details</h1>
+                <h1 class="display-8">{{object.title|capfirst}} details</h1>
                 <small class="text-muted">
                     Posted by: <a href="{% url 'user_profile' object.profile.id %}">
                     {{object.profile|capfirst}} </a> | {{object.date_posted|date:"F d,Y"}}</small>
-            </div>
-        </div>
+</div>
+
+
         <hr class="my-4">
         <div class="row">
             <div class="col-sm-4">
                 <img alt="coming soon" src="{{object.image.url}}" style="height: 200px">
             </div>
 
-            <div class="col-sm-8">
+            <div class="row">
+            <div class="float-right">
+            <div class="col-2 text-truncate">
                 <small class="lead text-success">
                     Category: <strong>{{ object.item_category }}</strong> |
                     Status: <em>{{object.que_assign}}</em>
@@ -28,9 +34,44 @@
                     Expiration date: {{object.expiration|date:"F d,Y"}}</small>
                 <hr>
                 <p class="lead">{{object.description}}</p>
+                </div>
+                </div>
+                </div>
 
-            </div>
-        </div>
+        </div> {% endcomment %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mt-2">
+            <div class="card" style="width: 900px; height: auto 325px; margin: 20px">
+                <div class="card-horizontal">
+                    <div class="img-square-wrapper">
+                    <img alt="coming soon" src="{{object.image.url}}" class="img-fluid" style="height: 200px">
+                        {% comment %} <img class="" src="http://via.placeholder.com/300x180" alt="Card image cap"> {% endcomment %}
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{object.title|capfirst}}</h4>
+                        <p class="card-text">
+                <small class="lead text-success">
+                    Category: <strong>{{ object.item_category }}</strong> |
+                    Status: <em>{{object.que_assign}}</em>
+                </small><br>
+                <small class="lead text-danger">
+                    Expiration date: {{object.expiration|date:"F d,Y"}}</small>
+                <hr>
+                <p class="lead">{{object.description}}</p>
+                        </p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                    <small class="text-muted">
+                    Posted by: <a href="{% url 'user_profile' object.profile.id %}">
+                    {{object.profile|capfirst}} </a> | {{object.date_posted|date:"F d,Y"}}</small>
+                </div>
+
+   
+   
+
         <hr class="my-4">
         <div class="text-center">
             <a class="btn btn-primary btn-lg" href="{% url 'homepage' %}" role="button">Home</a>
@@ -49,8 +90,14 @@
                 {% post_to_reddit "Box item: {{object.title}}" object_or_url  "Share via reddit" %}
                 </div>
 
-        </div>
-    </div>
-</div>
+
+
+
+
+
+
+
+
+
 {% endblock content %}
 
