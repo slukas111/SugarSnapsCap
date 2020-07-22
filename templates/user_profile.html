@@ -69,7 +69,7 @@
                             <h3 class="mb-0 text-truncated">Snap Circle </h3>
 
 
-                            <p class="lead">Following {{following_count}} </p>
+                            <p class="lead">Followers {{following_count}} </p>
 
             <div classs="row">
             <div class="col-12 col-lg-8 col-md-6">
@@ -96,24 +96,19 @@
              </div>
 
             <div class='follow-unfollow'>
-                {% if user.is_authenticated %}
-                {% if profile in all_followers %}
+                {% if request.user == profile.user%}
+                    <hr>
+                    {%else%}
+                    {% if request.user.profile in all_followers %}
+                    <button class="btn btn-outline-success and-all-other-classes" type="button">
+                        <a href="/unfollow/{{id}}/" style="color:inherit"> Unfollow </a>
+                    </button>
+                    {%else%}
+                    <button class="btn btn-outline-success and-all-other-classes" type="button">
+                        <a href="/follow/{{id}}/" style="color:inherit"> Follow </a>
+                    {%endif%}
+                    </button>
                 {%endif%}
-                {%endif%}
-
-                 {% if request.user == profile.user%}
-                        <hr>
-                        {%else%}
-                        {% if is_following %}
-                        <button class="btn btn-outline-success and-all-other-classes" type="button">
-                            <a href="/unfollow/{{id}}/" style="color:inherit"> Unfollow </a>
-                        </button>
-                        {%else%}
-                        <button class="btn btn-outline-success and-all-other-classes" type="button">
-                            <a href="/follow/{{id}}/" style="color:inherit"> Follow </a>
-                            {%endif%}
-                        </button>
-                        {%endif%}
             </div>
             </div>
             </div>

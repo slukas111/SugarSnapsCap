@@ -10,22 +10,25 @@ from users.models import Profile
 
 
 def login_view(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            user = authenticate(
-                request,
-                username=data['username'],
-                password=data['password']
-            )
-            if user:
-                login(request, user)
-                return HttpResponseRedirect(
-                    request.GET.get('next', reverse('homepage'))
+    if request.user.is_anonymous:
+        if request.method == 'POST':
+            form = LoginForm(request.POST)
+            if form.is_valid():
+                data = form.cleaned_data
+                user = authenticate(
+                    request,
+                    username=data['username'],
+                    password=data['password']
                 )
-    form = LoginForm()
-    return render(request, 'users/login.html', {'form': form})
+                if user:
+                    login(request, user)
+                    return HttpResponseRedirect(
+                        request.GET.get('next', reverse('homepage'))
+                    )
+        form = LoginForm()
+        return render(request, 'users/login.html', {'form': form})
+    return HttpResponseRedirect(reverse('homepage'))
+    
 
 
 @login_required
@@ -35,17 +38,19 @@ def logout_view(request):
 
 
 def signup_view(request):
-    html = 'users/register.html'
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            user = User.objects.create_user(
-                username=data['username'],
-                password=data['password']
-            )
-            if user:
-                login(request, user)
-                return HttpResponseRedirect(reverse('homepage'))
-    form = SignUpForm()
-    return render(request, html, {'form': form})
+    if request.user.is_anonymous:
+        html = 'users/register.html'
+        if request.method == 'POST':
+            form = SignUpForm(request.POST)
+            if form.is_valid():
+                data = form.cleaned_data
+                user = User.objects.create_user(
+                    username=data['username'],
+                    password=data['password']
+                )
+                if user:
+                    login(request, user)
+                    return HttpResponseRedirect(reverse('homepage'))
+        form = SignUpForm()
+        return render(request, html, {'form': form})
+    return HttpResponseRedirect(reverse('homepage'))
