@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 import sys
 sys.path.append('..')
-from locations.models import Area
+from locations.models import Area, Location
 
 
 class LoginForm(forms.Form):
@@ -21,4 +21,4 @@ class SignUpForm(forms.Form):
     username = forms.CharField(max_length=100, help_text='username')
     password = forms.CharField(widget=forms.PasswordInput)
     email = forms.EmailField(max_length=150, help_text='Email')
-    location = forms.ModelChoiceField(queryset=Area.objects.all())
+    location = forms.ModelChoiceField(queryset=Location.objects.all())
