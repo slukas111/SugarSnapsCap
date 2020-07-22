@@ -16,11 +16,6 @@ class PostListView(ListView):
     model = BoxItem
     template_name = 'index.html'
     context_object_name = 'posts'
-<<<<<<< HEAD
-    ordering = ['expiration']
-=======
-    ordering = ['date_posted']
->>>>>>> b70a6fe9440ed3543fd6fbc23486b4bbc919b332
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -40,14 +35,16 @@ class PostListView(ListView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = BoxItem
-    fields = ['title', 'item_category', 'description', 'que_assign', 'expiration', 'image']
+    fields = ['title', 'item_category', 'description',
+              'que_assign', 'expiration', 'image']
 
     def get_form(self):
         curr_user = self.request.user
         print('current user', curr_user)
         form = super().get_form()
         form.fields['expiration'].widget = DatePickerInput()
-        notify.send(sender=self.request.user, recipient=self.request.user, verb='donation posted')
+        notify.send(sender=self.request.user,
+                    recipient=self.request.user, verb='donation posted')
         return form
 
     def form_valid(self, form):
@@ -61,7 +58,8 @@ class PostDetailView(DetailView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = BoxItem
-    fields = ['title', 'item_category', 'description', 'expiration', 'que_assign', 'image']
+    fields = ['title', 'item_category', 'description',
+              'expiration', 'que_assign', 'image']
 
     def form_valid(self, form):
         form.instance.profile = self.request.user
