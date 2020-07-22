@@ -75,9 +75,10 @@
         <hr class="my-4">
         <div class="text-center">
             <a class="btn btn-primary btn-lg" href="{% url 'homepage' %}" role="button">Home</a>
+            {% if object.profile == request.user%
             <a class="btn btn-warning btn-lg" href="{%url 'postupdate' object.id%}">Update</a>
             <a class="btn btn-danger btn-lg" href="{%url 'postdelete' object.id %}">Delete</a>
-
+             {%endif%}
             <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary"
                     data-toggle="dropdown" id="dropdownMenuButton" type="button">
                 <i class="fas fa-share-alt fa-3x"></i>
