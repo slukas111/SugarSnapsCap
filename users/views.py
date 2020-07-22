@@ -53,10 +53,11 @@ def register(request):
 
 def user_profile_view(request, user_id):
     html = 'user_profile.html'
+    logged_in_user = request.user
     profile = User.objects.get(id=user_id).profile
     user = User.objects.get(id=user_id)
     donations = BoxItem.objects.filter(profile=user_id).order_by('-id')
-    all_followers = request.user.profile.following.all()
+    all_followers = user.profile.following.all()
     following_count = all_followers.count()
     notification = user.notifications.read()
     noti = user.notifications.unread()
@@ -67,7 +68,7 @@ def user_profile_view(request, user_id):
         'all_followers': all_followers,
         'following_count': following_count,
         'profile': profile,
-        'is_following': profile in all_followers,
+        'is_following': logged_in_user in all_followers,
         'user': user,
         'image': profile.profile_image,
         'noti': noti,
@@ -111,11 +112,12 @@ def Follow(request, id):
     html = "user_profile.html"
     own_profile = request.user.profile  # or your queryset to get
     following_profile = Profile.objects.get(id=id)
-    own_profile.following.add(following_profile)  # and .remove() for unfollow
-    own_profile.save()
+    following_profile.following.add(own_profile)  # and .remove() for unfollow
+    following_profile.save()
     message = 'started to following you.'
     notify.send(sender=own_profile, recipient=following_profile.user, verb=message, description=own_profile.user.id)
     return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))
+    
 
 
 @login_required
@@ -123,8 +125,8 @@ def Unfollow(request, id):
     html = "user_profile.html"
     own_profile = request.user.profile  # or your queryset to get
     following_profile = Profile.objects.get(id=id)
-    own_profile.following.remove(following_profile)  # and .remove() for unfollow
-    own_profile.save()
+    following_profile.following.remove(own_profile)  # and .remove() for unfollow
+    following_profile.save()
     notify.send(sender=own_profile, recipient=following_profile.user, verb='unfollowed you.',
                 description=own_profile.user.id)
 

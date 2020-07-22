@@ -16,7 +16,11 @@ class PostListView(ListView):
     model = BoxItem
     template_name = 'index.html'
     context_object_name = 'posts'
+<<<<<<< HEAD
     ordering = ['expiration']
+=======
+    ordering = ['date_posted']
+>>>>>>> b70a6fe9440ed3543fd6fbc23486b4bbc919b332
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

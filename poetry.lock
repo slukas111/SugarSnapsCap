@@ -145,6 +145,17 @@ swapper = "*"
 
 [[package]]
 category = "main"
+description = "A Django widget for the Tempus Dominus Bootstrap 4 DateTime picker."
+name = "django-tempus-dominus"
+optional = false
+python-versions = "*"
+version = "5.1.2.13"
+
+[package.dependencies]
+django = "*"
+
+[[package]]
+category = "main"
 description = "A reusable Django field that allows you to store validated JSON in your model."
 name = "jsonfield"
 optional = false
@@ -214,7 +225,7 @@ version = "5.1.0"
 brotli = ["brotli"]
 
 [metadata]
-content-hash = "497b7c8b5ac9281dc6028c71b9a0853d5ba082d54fc573b2032f224b86f507fa"
+content-hash = "3dbb1238844d627304eac66e1304d0c7164973a8a04bc6412085acf47e1b3b45"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -265,6 +276,10 @@ django-social-share = [
 ]
 django-star-ratings = [
     {file = "django-star-ratings-0.9.1.tar.gz", hash = "sha256:ec6dca90cc2f195353ba073c0daa84207640155bbc9ee46155c95efc6d37a787"},
+]
+django-tempus-dominus = [
+    {file = "django-tempus-dominus-5.1.2.13.tar.gz", hash = "sha256:b0edf8a5b4f919192ef4ca0f40c9e0ebe35604323037990e8d97b583e589e99b"},
+    {file = "django_tempus_dominus-5.1.2.13-py3-none-any.whl", hash = "sha256:6a44c3d55c82680a133867b6ad8d727213282eab681441e0ba3b5639740847f7"},
 ]
 jsonfield = [
     {file = "jsonfield-3.1.0-py3-none-any.whl", hash = "sha256:df857811587f252b97bafba42e02805e70a398a7a47870bc6358a0308dd689ed"},
