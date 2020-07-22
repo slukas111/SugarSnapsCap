@@ -70,14 +70,19 @@
 
 
             <p class="lead">Following {{following_count}} </p>
-            <div class="following-users">
+
+            <div classs="row">
+            <div class="col-12 col-lg-8 col-md-6">
                 {% for followers in all_followers %}
+                <span class="stext-105 cl3">
                 <img
                         alt="{{followers.title}}"
                         class="rounded-circle mr-2"
                         src="{{ followers.profile_image.url }}"
                         style="width: 80px; height: 80px;">
                 <ul style="list-style-type:none">
+                </span>
+
                     <li>
                         <a href="/profile/{{followers.id}}">{{followers.user}}</a>
                     </li>
@@ -86,6 +91,8 @@
             </div>
              </div>
              </div> 
+             </div>
+
  {% comment %} <div class="carousel slide" data-ride="carousel">
                 {% for followers in all_followers %}     
         <div class="followers{% if forloop.first %} active{% endif %}">
