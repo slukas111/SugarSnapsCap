@@ -4,9 +4,7 @@ from .models import BoxItem, Categories
 # Register your models here.
 
 @admin.register(BoxItem)
-class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'bio', 'location')
-    list_editable = ('location',)
+class BoxItemAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'description', 'que_assign')
 
-# admin.site.register(BoxItem)
 admin.site.register(Categories)
